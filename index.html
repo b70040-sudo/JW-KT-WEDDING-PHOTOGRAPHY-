@@ -1,340 +1,182 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-Hant">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="theme-color" content="#0b0b0d" />
-  <title>墾丁拍攝行程｜10/17</title>
-  <link rel="manifest" href="manifest.json">
-  <link rel="apple-touch-icon" href="icon.svg">
-  <style>
-    :root{
-      --bg:#0b0b0d;
-      --panel:#17171b;
-      --panel2:#202027;
-      --text:#f7f7f8;
-      --muted:#a7a7af;
-      --line:#34343c;
-      --accent:#77e4b1;
-      --accent2:#ffb4d8;
-      --warn:#ffd56f;
-      --danger:#ff7d8a;
-      --shadow:0 14px 35px rgba(0,0,0,.28);
-      --radius:22px;
-    }
-    *{box-sizing:border-box}
-    html,body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","PingFang TC","Noto Sans TC","Segoe UI",sans-serif}
-    body{min-height:100vh}
-    .app{max-width:760px;margin:0 auto;padding:24px 18px 110px}
-    .topbar{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;margin-bottom:18px}
-    .eyebrow{font-size:14px;color:var(--muted);letter-spacing:.08em;margin-bottom:4px}
-    h1{font-size:31px;line-height:1.15;margin:0;font-weight:850;letter-spacing:-.02em}
-    .date-pill{
-      flex:0 0 auto;background:linear-gradient(135deg,#ff8f9b,#ffb7dc 48%,#8aa8ff);
-      color:#111;border-radius:18px;padding:10px 14px;font-weight:900;font-size:22px;box-shadow:var(--shadow)
-    }
-    .hero{
-      background:linear-gradient(180deg,#151519,#111114);
-      border:1px solid #27272e;border-radius:28px;padding:18px;box-shadow:var(--shadow);margin-bottom:20px
-    }
-    .hero-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-    .mini{background:#1e1e23;border-radius:18px;padding:14px 12px}
-    .mini span{display:block;color:var(--muted);font-size:12px;margin-bottom:4px}
-    .mini strong{font-size:18px}
-    .section-head{display:flex;align-items:center;justify-content:space-between;margin:22px 2px 12px}
-    .section-head h2{font-size:20px;margin:0}
-    .section-head small{color:var(--muted)}
-    .timeline{position:relative}
-    .timeline:before{
-      content:"";position:absolute;left:26px;top:12px;bottom:12px;width:2px;background:linear-gradient(var(--accent2),#8aa8ff,var(--accent))
-    }
-    .card{
-      position:relative;margin-left:54px;margin-bottom:14px;background:var(--panel);
-      border:1px solid #28282f;border-radius:var(--radius);padding:16px 16px 15px;box-shadow:0 8px 24px rgba(0,0,0,.18)
-    }
-    .dot{
-      position:absolute;left:-39px;top:21px;width:22px;height:22px;border-radius:50%;
-      background:var(--bg);border:5px solid var(--accent2);box-shadow:0 0 0 3px var(--bg)
-    }
-    .card.done{opacity:.62}
-    .card.done .title{text-decoration:line-through}
-    .card-top{display:flex;gap:12px;align-items:flex-start;justify-content:space-between}
-    .time{
-      font-size:29px;font-weight:900;letter-spacing:.01em;
-      background:linear-gradient(90deg,#ffb4d8,#9affb5,#fff59e,#89a8ff);
-      -webkit-background-clip:text;background-clip:text;color:transparent;white-space:nowrap
-    }
-    .title{font-size:18px;font-weight:800;line-height:1.35;margin-top:4px}
-    .sub{color:var(--muted);font-size:14px;margin-top:5px;line-height:1.55}
-    .tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px}
-    .tag{font-size:12px;background:var(--panel2);border:1px solid #303039;border-radius:999px;padding:7px 9px;color:#ddd}
-    .actions{display:flex;gap:8px;margin-top:13px;flex-wrap:wrap}
-    button,.btn{
-      border:0;border-radius:13px;background:#282830;color:white;padding:10px 12px;font-weight:700;font-size:14px;
-      text-decoration:none;display:inline-flex;align-items:center;gap:6px;cursor:pointer
-    }
-    .primary{background:var(--accent);color:#08130e}
-    .ghost{background:#24242a}
-    .danger{background:#342126;color:#ffb7c0}
-    .fab{
-      position:fixed;right:max(20px,calc((100vw - 760px)/2 + 20px));bottom:calc(24px + env(safe-area-inset-bottom));
-      width:66px;height:66px;border-radius:50%;background:#00d76f;color:#062c18;font-size:35px;font-weight:500;
-      box-shadow:0 14px 34px rgba(0,215,111,.28);z-index:20
-    }
-    .footer-note{color:var(--muted);font-size:12px;text-align:center;margin-top:18px}
-    dialog{
-      width:min(92vw,560px);border:1px solid #34343d;border-radius:24px;background:#151519;color:white;padding:0;box-shadow:var(--shadow)
-    }
-    dialog::backdrop{background:rgba(0,0,0,.68);backdrop-filter:blur(3px)}
-    .modal{padding:20px}
-    .modal h3{margin:0 0 14px;font-size:21px}
-    .field{margin-bottom:12px}
-    label{display:block;font-size:12px;color:var(--muted);margin-bottom:6px}
-    input,textarea{
-      width:100%;border:1px solid #34343d;background:#202026;color:white;border-radius:14px;padding:12px;font-size:16px;outline:none
-    }
-    textarea{min-height:92px;resize:vertical}
-    .modal-actions{display:flex;justify-content:flex-end;gap:9px;margin-top:14px}
-    .check{
-      width:32px;height:32px;padding:0;border-radius:50%;background:#24242a;color:#fff;font-size:18px;flex:0 0 auto
-    }
-    .empty{padding:30px;text-align:center;color:var(--muted);border:1px dashed #34343d;border-radius:20px}
-    @media(max-width:540px){
-      .app{padding:20px 14px 110px}
-      h1{font-size:27px}
-      .date-pill{font-size:19px}
-      .hero-grid{grid-template-columns:1fr}
-      .timeline:before{left:21px}
-      .card{margin-left:45px}
-      .dot{left:-34px}
-      .time{font-size:25px}
-    }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#09090b">
+<title>墾丁拍攝行程｜10/17–10/18</title>
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icon.svg">
+<style>
+:root{
+  --bg:#09090b;--panel:#151518;--panel2:#1e1e23;--line:#2d2d34;
+  --text:#f7f7f8;--muted:#aaaab2;--green:#72e7ae;--pink:#ffb4d7;
+  --blue:#91aaff;--yellow:#ffe384;--danger:#ff8f9c;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"PingFang TC","Noto Sans TC","Segoe UI",sans-serif}
+.app{max-width:760px;margin:auto;padding:24px 16px 120px}
+.header{display:flex;justify-content:space-between;gap:14px;align-items:flex-start;margin-bottom:18px}
+.kicker{color:var(--muted);font-size:12px;letter-spacing:.14em;margin-bottom:6px}
+h1{margin:0;font-size:31px;line-height:1.16;letter-spacing:-.02em}
+.date{
+  padding:10px 14px;border-radius:18px;color:#111;font-size:20px;font-weight:900;
+  background:linear-gradient(135deg,#ff9bb1,#ffd8ee 52%,#9db1ff)
+}
+.summary{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin:18px 0 20px}
+.stat{background:var(--panel);border:1px solid #24242a;border-radius:17px;padding:12px}
+.stat small{display:block;color:var(--muted);font-size:11px;margin-bottom:4px}
+.stat strong{font-size:16px}
+.day{border:1px solid #28282e;border-radius:22px;background:var(--panel);margin-bottom:14px;overflow:hidden}
+.day summary{list-style:none;cursor:pointer;padding:18px;display:flex;align-items:center;justify-content:space-between;gap:12px;font-weight:850}
+.day summary::-webkit-details-marker{display:none}
+.day-title{display:flex;align-items:center;gap:10px;font-size:20px}
+.chev{color:var(--muted);transition:.2s}
+details[open] .chev{transform:rotate(180deg)}
+.day-content{padding:0 14px 14px}
+.timeline{position:relative}
+.timeline:before{content:"";position:absolute;left:20px;top:5px;bottom:5px;width:2px;background:linear-gradient(var(--pink),var(--blue),var(--green))}
+.item{position:relative;margin-left:43px;background:var(--panel2);border:1px solid #303038;border-radius:18px;padding:14px;margin-bottom:10px}
+.item:before{content:"";position:absolute;left:-31px;top:18px;width:16px;height:16px;border-radius:50%;background:var(--bg);border:4px solid var(--pink)}
+.item.done{opacity:.55}
+.item.done .name{text-decoration:line-through}
+.top{display:flex;justify-content:space-between;gap:12px}
+.time{font-size:23px;font-weight:900;background:linear-gradient(90deg,var(--pink),var(--green),var(--yellow),var(--blue));-webkit-background-clip:text;color:transparent}
+.name{font-size:17px;font-weight:800;margin-top:3px}
+.note{color:var(--muted);font-size:13px;line-height:1.55;margin-top:7px}
+.btns{display:flex;flex-wrap:wrap;gap:7px;margin-top:11px}
+button,.btn{border:0;border-radius:12px;background:#2a2a31;color:#fff;padding:9px 11px;font-size:13px;font-weight:750;text-decoration:none;cursor:pointer}
+.map{background:var(--green);color:#07160e}
+.checkbtn{width:31px;height:31px;padding:0;border-radius:50%;font-size:17px;flex:0 0 auto}
+.tools-title{font-size:20px;margin:24px 2px 11px}
+.toolgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.tool{background:var(--panel);border:1px solid #292930;border-radius:18px;padding:16px;text-align:left}
+.tool .ico{font-size:25px;margin-bottom:8px}
+.tool strong{display:block;font-size:15px}
+.tool span{display:block;color:var(--muted);font-size:12px;margin-top:4px;line-height:1.4}
+dialog{width:min(92vw,560px);max-height:82vh;border:1px solid #33333a;border-radius:22px;background:#151518;color:#fff;padding:0}
+dialog::backdrop{background:rgba(0,0,0,.7);backdrop-filter:blur(3px)}
+.modal{padding:18px}
+.modal h2{margin:0 0 12px;font-size:21px}
+.close{float:right;background:#292930}
+.checklist{display:grid;gap:8px}
+.row{display:flex;align-items:flex-start;gap:10px;background:#1f1f24;border-radius:14px;padding:11px}
+.row input{margin-top:3px;accent-color:#72e7ae;transform:scale(1.2)}
+.row label{font-size:14px;line-height:1.45}
+.tip{background:#1f1f24;border-radius:14px;padding:12px;margin-bottom:8px}
+.tip b{display:block;margin-bottom:5px}
+.tip p{margin:0;color:var(--muted);font-size:13px;line-height:1.55}
+.quicknav{display:grid;gap:9px}
+.quicknav a{display:flex;justify-content:space-between;align-items:center;background:#1f1f24;border-radius:14px;padding:13px;text-decoration:none;color:#fff}
+.notearea{width:100%;min-height:180px;background:#1f1f24;color:#fff;border:1px solid #34343c;border-radius:14px;padding:12px;font-size:15px;resize:vertical}
+.save{margin-top:10px;background:var(--green);color:#08130e}
+.footer{margin-top:18px;color:var(--muted);font-size:11px;text-align:center}
+@media(max-width:520px){.summary{grid-template-columns:1fr}.toolgrid{grid-template-columns:1fr 1fr}h1{font-size:27px}.date{font-size:17px}}
+</style>
 </head>
 <body>
-  <main class="app">
-    <div class="topbar">
-      <div>
-        <div class="eyebrow">KENTING SHOOTING PLAN</div>
-        <h1>墾丁拍攝行程<br>規劃版</h1>
-      </div>
-      <div class="date-pill">10/17</div>
-    </div>
+<main class="app">
+  <header class="header">
+    <div><div class="kicker">KENTING SHOOTING</div><h1>墾丁拍攝行程</h1></div>
+    <div class="date">10/17–10/18</div>
+  </header>
 
-    <section class="hero">
-      <div class="hero-grid">
-        <div class="mini"><span>集合</span><strong>05:30</strong></div>
-        <div class="mini"><span>出發</span><strong>07:00–07:30</strong></div>
-        <div class="mini"><span>首站抵達</span><strong>約 09:30</strong></div>
-      </div>
-    </section>
+  <section class="summary">
+    <div class="stat"><small>DAY 1 化妝</small><strong>07:00</strong></div>
+    <div class="stat"><small>DAY 1 出發</small><strong>09:00</strong></div>
+    <div class="stat"><small>DAY 2 拍攝</small><strong>07:00</strong></div>
+  </section>
 
-    <div class="section-head">
-      <h2>📸 今日時間軸</h2>
-      <small id="progressText"></small>
-    </div>
+  <details class="day" open>
+    <summary><span class="day-title">📸 10/17｜拍攝內容</span><span class="chev">⌄</span></summary>
+    <div class="day-content"><div class="timeline" id="day1"></div></div>
+  </details>
 
-    <section class="timeline" id="timeline"></section>
-    <div class="footer-note">資料會保存在此裝置瀏覽器，可隨時新增或修改。</div>
-  </main>
+  <details class="day">
+    <summary><span class="day-title">🌅 10/18｜拍攝內容</span><span class="chev">⌄</span></summary>
+    <div class="day-content"><div class="timeline" id="day2"></div></div>
+  </details>
 
-  <button class="fab" id="addBtn" aria-label="新增行程">＋</button>
+  <h2 class="tools-title">實用功能</h2>
+  <section class="toolgrid">
+    <button class="tool" onclick="openModal('carry')"><div class="ico">👰🏻</div><strong>婚紗攜帶清單</strong><span>可勾選，避免漏帶重要用品</span></button>
+    <button class="tool" onclick="openModal('tips')"><div class="ico">📷</div><strong>拍攝提醒</strong><span>妝髮、服裝、海邊拍攝注意事項</span></button>
+    <button class="tool" onclick="openModal('nav')"><div class="ico">🧭</div><strong>快速導航</strong><span>午餐、民宿一鍵開啟 Google Maps</span></button>
+    <button class="tool" onclick="openModal('notes')"><div class="ico">📝</div><strong>臨時備忘</strong><span>現場增加事項會自動保存在手機</span></button>
+  </section>
+  <div class="footer">行程完成狀態、攜帶清單與備忘會儲存在目前裝置。</div>
+</main>
 
-  <dialog id="editor">
-    <form method="dialog" class="modal" id="form">
-      <h3 id="modalTitle">新增行程</h3>
-      <input type="hidden" id="editId">
-      <div class="field">
-        <label>時間</label>
-        <input id="time" placeholder="例如 14:30 或 15:00～16:00" required>
-      </div>
-      <div class="field">
-        <label>標題</label>
-        <input id="title" placeholder="例如 民宿拍攝" required>
-      </div>
-      <div class="field">
-        <label>地點／導航搜尋文字</label>
-        <input id="place" placeholder="例如 屏鵝公路">
-      </div>
-      <div class="field">
-        <label>服裝</label>
-        <input id="outfit" placeholder="例如 男：白T＋牛仔褲／女：白色洋裝">
-      </div>
-      <div class="field">
-        <label>備註</label>
-        <textarea id="note" placeholder="拍攝時間、補妝、道具、注意事項…"></textarea>
-      </div>
-      <div class="modal-actions">
-        <button type="button" class="ghost" id="cancelBtn">取消</button>
-        <button type="submit" class="primary">儲存</button>
-      </div>
-    </form>
-  </dialog>
+<dialog id="carry"><div class="modal"><button class="close" onclick="carry.close()">✕</button><h2>👰🏻 婚紗拍攝攜帶清單</h2><div class="checklist" id="carryList"></div></div></dialog>
+<dialog id="tips"><div class="modal"><button class="close" onclick="tips.close()">✕</button><h2>📷 拍攝提醒</h2>
+<div class="tip"><b>妝髮</b><p>前一晚避免太晚睡與喝太多水；當天穿前開式上衣，換裝較不容易碰亂妝髮。</p></div>
+<div class="tip"><b>白紗／黑紗</b><p>每套服裝拍攝前先確認胸貼、隱形內衣、鞋款、飾品與裙襬是否完整，換場前再快速檢查一次。</p></div>
+<div class="tip"><b>海邊拍攝</b><p>準備拖鞋、毛巾、防曬、飲水與防風固定用品；器材與手機避免直接放在沙地。</p></div>
+<div class="tip"><b>時間掌握</b><p>午後與傍晚光線變化快，白紗海邊與 18:00 後黑紗拍攝建議保留移動與換裝緩衝。</p></div>
+<div class="tip"><b>照片備份</b><p>拍攝空檔確認記憶卡與電池狀態；重要手機照片可同步雲端或至少保留兩份。</p></div>
+</div></dialog>
+
+<dialog id="nav"><div class="modal"><button class="close" onclick="nav.close()">✕</button><h2>🧭 快速導航</h2><div class="quicknav">
+<a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=%E8%BD%9F%E7%A8%BB%E6%A9%9F%20Hometown%20%E6%81%86%E6%98%A5%E6%97%A9%E5%8D%88%E9%A4%90"><span>🍽️ 轟稻機 Hometown</span><b>開啟 ›</b></a>
+<a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=%E6%97%A5%E6%97%A5%E6%97%85%E6%B5%B7%20%E5%B1%8F%E6%9D%B1%E7%B8%A3%E6%BB%BF%E5%B7%9E%E9%84%89%E8%88%88%E6%B5%B7%E8%B7%AF33%E8%99%9F"><span>🏡 日日旅海</span><b>開啟 ›</b></a>
+</div></div></dialog>
+
+<dialog id="notes"><div class="modal"><button class="close" onclick="notes.close()">✕</button><h2>📝 臨時備忘</h2><textarea class="notearea" id="notearea" placeholder="例如：多帶一雙鞋、攝影師臨時交代事項、要補拍的畫面…"></textarea><button class="save" onclick="saveNote()">儲存備忘</button></div></dialog>
 
 <script>
-const seed = [
-  {
-    id: crypto.randomUUID(),
-    time: "05:30",
-    title: "抵達造型工作室",
-    place: "",
-    outfit: "",
-    note: "梳化、造型準備。",
-    done: false
-  },
-  {
-    id: crypto.randomUUID(),
-    time: "07:00～07:30",
-    title: "出發前往墾丁",
-    place: "墾丁",
-    outfit: "",
-    note: "確認器材、服裝與隨身物品後出發。",
-    done: false
-  },
-  {
-    id: crypto.randomUUID(),
-    time: "約 09:30",
-    title: "第一站｜屏鵝公路煮咖啡景點（海景）",
-    place: "屏鵝公路",
-    outfit: "男生：牛仔褲＋白 T＋黑色西裝外套｜女生：白色仙氣洋裝",
-    note: "預計拍攝 1 小時。",
-    done: false
-  },
-  {
-    id: crypto.randomUUID(),
-    time: "中午",
-    title: "休息＋午餐＋補妝",
-    place: "熊家豬腳",
-    outfit: "",
-    note: "午餐暫定熊家豬腳或早餐，休息後順便補妝。",
-    done: false
-  },
-  {
-    id: crypto.randomUUID(),
-    time: "下午",
-    title: "前往民宿拍攝",
-    place: "",
-    outfit: "",
-    note: "抵達後依現場光線與空間安排拍攝。",
-    done: false
-  },
-  {
-    id: crypto.randomUUID(),
-    time: "入住後",
-    title: "換白紗拍攝",
-    place: "",
-    outfit: "白紗",
-    note: "入住民宿後換裝，再進行白紗拍攝。",
-    done: false
-  }
+const MAP_LUNCH="https://www.google.com/maps/search/?api=1&query=%E8%BD%9F%E7%A8%BB%E6%A9%9F%20Hometown%20%E6%81%86%E6%98%A5%E6%97%A9%E5%8D%88%E9%A4%90";
+const MAP_STAY="https://www.google.com/maps/search/?api=1&query=%E6%97%A5%E6%97%A5%E6%97%85%E6%B5%B7%20%E5%B1%8F%E6%9D%B1%E7%B8%A3%E6%BB%BF%E5%B7%9E%E9%84%89%E8%88%88%E6%B5%B7%E8%B7%AF33%E8%99%9F";
+const schedule={
+ day1:[
+  {t:"07:00",n:"化妝",note:"妝髮與造型準備。"},
+  {t:"09:00",n:"出發",note:"確認婚紗、配件與拍攝用品後出發。"},
+  {t:"13:00",n:"轟稻機午餐",note:"午餐／休息。",map:MAP_LUNCH},
+  {t:"約 14:00",n:"日日旅海民宿拍攝",note:"抵達後先進行民宿場景拍攝。",map:MAP_STAY},
+  {t:"15:00",n:"入住・換白紗拍攝",note:"白紗拍攝：室內 ＆ 海邊。",map:MAP_STAY},
+  {t:"18:00 後",n:"黑紗拍攝",note:"傍晚／夜間黑紗拍攝。"}
+ ],
+ day2:[
+  {t:"06:00",n:"化妝",note:"第二天妝髮準備。"},
+  {t:"07:00",n:"拍攝輕寫真",note:"清晨自然光輕寫真。"},
+  {t:"08:00–09:00",n:"各自用餐",note:"自由早餐時間。"}
+ ]
+};
+let done=JSON.parse(localStorage.getItem("kenting_v2_done")||"{}");
+function renderDay(id,items){
+ const root=document.getElementById(id); root.innerHTML="";
+ items.forEach((x,i)=>{
+  const key=id+"_"+i, el=document.createElement("div");
+  el.className="item"+(done[key]?" done":"");
+  el.innerHTML=`<div class="top"><div><div class="time">${x.t}</div><div class="name">${x.n}</div></div>
+  <button class="checkbtn" onclick="toggleDone('${key}')">${done[key]?"✓":"○"}</button></div>
+  <div class="note">${x.note||""}</div>
+  ${x.map?`<div class="btns"><a class="btn map" target="_blank" rel="noopener" href="${x.map}">🧭 Google Maps</a></div>`:""}`;
+  root.appendChild(el);
+ });
+}
+function toggleDone(k){done[k]=!done[k];localStorage.setItem("kenting_v2_done",JSON.stringify(done));renderAll()}
+function renderAll(){renderDay("day1",schedule.day1);renderDay("day2",schedule.day2)}
+function openModal(id){document.getElementById(id).showModal()}
+const carryItems=[
+ "白紗／黑紗／輕寫真服裝","婚鞋＋好走的拖鞋／便鞋","隱形內衣／胸貼／膚色無痕內褲",
+ "耳環、項鍊、頭飾等造型配件","男生西裝／襯衫／皮鞋／皮帶／襪子",
+ "補妝品：粉餅、唇彩、吸油面紙","防曬用品／防蚊液","飲用水、吸管、簡單零食",
+ "毛巾／濕紙巾／衛生紙","髮夾、黑色橡皮筋、安全別針、雙面膠",
+ "手機／行動電源／充電線","相機／電池／記憶卡／充電器",
+ "透明雨傘或輕便雨具","新人戒指／捧花／想入鏡的小道具"
 ];
-
-const STORAGE = "kenting-shooting-plan-v1";
-let items = JSON.parse(localStorage.getItem(STORAGE) || "null") || seed;
-
-const timeline = document.getElementById("timeline");
-const editor = document.getElementById("editor");
-const form = document.getElementById("form");
-const modalTitle = document.getElementById("modalTitle");
-
-function save(){
-  localStorage.setItem(STORAGE, JSON.stringify(items));
-  render();
-}
-function mapsUrl(place){
-  return "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(place);
-}
-function escapeHtml(s=""){
-  return s.replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
-}
-function render(){
-  timeline.innerHTML = "";
-  if(!items.length){
-    timeline.innerHTML = '<div class="empty">還沒有行程，按右下角 ＋ 新增。</div>';
-  }
-  items.forEach(item=>{
-    const card = document.createElement("article");
-    card.className = "card" + (item.done ? " done" : "");
-    card.innerHTML = `
-      <div class="dot"></div>
-      <div class="card-top">
-        <div>
-          <div class="time">${escapeHtml(item.time)}</div>
-          <div class="title">${escapeHtml(item.title)}</div>
-          ${item.place ? `<div class="sub">📍 ${escapeHtml(item.place)}</div>` : ""}
-        </div>
-        <button class="check" data-action="done" data-id="${item.id}" title="完成">${item.done ? "✓" : "○"}</button>
-      </div>
-      <div class="tags">
-        ${item.outfit ? `<span class="tag">👔 ${escapeHtml(item.outfit)}</span>` : ""}
-        ${item.note ? `<span class="tag">📝 ${escapeHtml(item.note)}</span>` : ""}
-      </div>
-      <div class="actions">
-        ${item.place ? `<a class="btn primary" target="_blank" rel="noopener" href="${mapsUrl(item.place)}">🧭 導航</a>` : ""}
-        <button class="ghost" data-action="edit" data-id="${item.id}">✏️ 編輯</button>
-        <button class="danger" data-action="delete" data-id="${item.id}">🗑️ 刪除</button>
-      </div>`;
-    timeline.appendChild(card);
-  });
-  const done = items.filter(x=>x.done).length;
-  document.getElementById("progressText").textContent = `${done}/${items.length} 完成`;
-}
-function openEditor(item=null){
-  modalTitle.textContent = item ? "編輯行程" : "新增行程";
-  document.getElementById("editId").value = item?.id || "";
-  document.getElementById("time").value = item?.time || "";
-  document.getElementById("title").value = item?.title || "";
-  document.getElementById("place").value = item?.place || "";
-  document.getElementById("outfit").value = item?.outfit || "";
-  document.getElementById("note").value = item?.note || "";
-  editor.showModal();
-}
-document.getElementById("addBtn").onclick = ()=>openEditor();
-document.getElementById("cancelBtn").onclick = ()=>editor.close();
-
-timeline.addEventListener("click", e=>{
-  const btn = e.target.closest("[data-action]");
-  if(!btn) return;
-  const id = btn.dataset.id;
-  const action = btn.dataset.action;
-  const item = items.find(x=>x.id===id);
-  if(action==="done"){
-    item.done = !item.done; save();
-  } else if(action==="edit"){
-    openEditor(item);
-  } else if(action==="delete"){
-    if(confirm("確定要刪除這筆行程嗎？")){
-      items = items.filter(x=>x.id!==id); save();
-    }
-  }
+let carryState=JSON.parse(localStorage.getItem("kenting_v2_carry")||"{}");
+const carryList=document.getElementById("carryList");
+carryItems.forEach((x,i)=>{
+ const row=document.createElement("div");row.className="row";
+ row.innerHTML=`<input type="checkbox" id="c${i}" ${carryState[i]?"checked":""}><label for="c${i}">${x}</label>`;
+ row.querySelector("input").onchange=e=>{carryState[i]=e.target.checked;localStorage.setItem("kenting_v2_carry",JSON.stringify(carryState))};
+ carryList.appendChild(row);
 });
-
-form.addEventListener("submit", e=>{
-  e.preventDefault();
-  const id = document.getElementById("editId").value;
-  const data = {
-    time: document.getElementById("time").value.trim(),
-    title: document.getElementById("title").value.trim(),
-    place: document.getElementById("place").value.trim(),
-    outfit: document.getElementById("outfit").value.trim(),
-    note: document.getElementById("note").value.trim()
-  };
-  if(!data.time || !data.title) return;
-  if(id){
-    const item = items.find(x=>x.id===id);
-    Object.assign(item,data);
-  }else{
-    items.push({id:crypto.randomUUID(), ...data, done:false});
-  }
-  editor.close();
-  save();
-});
-
-render();
-
-if("serviceWorker" in navigator){
-  window.addEventListener("load", ()=>navigator.serviceWorker.register("sw.js").catch(()=>{}));
-}
+const notearea=document.getElementById("notearea");
+notearea.value=localStorage.getItem("kenting_v2_note")||"";
+function saveNote(){localStorage.setItem("kenting_v2_note",notearea.value);alert("備忘已儲存 ✓")}
+renderAll();
+if("serviceWorker" in navigator){addEventListener("load",()=>navigator.serviceWorker.register("sw.js").catch(()=>{}))}
 </script>
-</body>
-</html>
+</body></html>
