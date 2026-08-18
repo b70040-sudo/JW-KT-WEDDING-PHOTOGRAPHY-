@@ -72,6 +72,14 @@ dialog::backdrop{background:rgba(0,0,0,.7);backdrop-filter:blur(3px)}
 .save{margin-top:10px;background:var(--green);color:#08130e}
 .footer{margin-top:18px;color:var(--muted);font-size:11px;text-align:center}
 @media(max-width:520px){.summary{grid-template-columns:1fr}.toolgrid{grid-template-columns:1fr 1fr}h1{font-size:27px}.date{font-size:17px}}
+
+.item summary{list-style:none;cursor:pointer}
+.item summary::-webkit-details-marker{display:none}
+.item-summary{align-items:center}
+.item-chev{color:var(--muted);font-size:18px;transition:.2s}
+.item[open] .item-chev{transform:rotate(180deg)}
+.item-detail{padding-top:2px}
+.checkbtn-wide{background:#2a2a31;color:#fff}
 </style>
 </head>
 <body>
@@ -145,12 +153,16 @@ let done=JSON.parse(localStorage.getItem("kenting_v2_done")||"{}");
 function renderDay(id,items){
  const root=document.getElementById(id); root.innerHTML="";
  items.forEach((x,i)=>{
-  const key=id+"_"+i, el=document.createElement("div");
+  const key=id+"_"+i, el=document.createElement("details");
   el.className="item"+(done[key]?" done":"");
-  el.innerHTML=`<div class="top"><div><div class="time">${x.t}</div><div class="name">${x.n}</div></div>
-  <button class="checkbtn" onclick="toggleDone('${key}')">${done[key]?"✓":"○"}</button></div>
-  <div class="note">${x.note||""}</div>
-  ${x.map?`<div class="btns"><a class="btn map" target="_blank" rel="noopener" href="${x.map}">🧭 Google Maps</a></div>`:""}`;
+  el.innerHTML=`<summary class="top item-summary"><div><div class="time">${x.t}</div><div class="name">${x.n}</div></div><span class="item-chev">⌄</span></summary>
+  <div class="item-detail">
+    <div class="note">${x.note||""}</div>
+    <div class="btns">
+      ${x.map?`<a class="btn map" target="_blank" rel="noopener" href="${x.map}">🧭 Google Maps</a>`:""}
+      <button class="checkbtn-wide" onclick="event.preventDefault();event.stopPropagation();toggleDone('${key}')">${done[key]?"✓ 已完成":"○ 標記完成"}</button>
+    </div>
+  </div>`;
   root.appendChild(el);
  });
 }
