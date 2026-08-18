@@ -3,8 +3,8 @@
   "short_name": "墾丁拍攝",
   "start_url": "./",
   "display": "standalone",
-  "background_color": "#08090c",
-  "theme_color": "#08090c",
+  "background_color": "#0d0f13",
+  "theme_color": "#0f1115",
   "icons": [
     {
       "src": "icon.svg",
