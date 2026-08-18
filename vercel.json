@@ -1,16 +1,6 @@
 {
-  "headers": [
-    {
-      "source": "/index.html",
-      "headers": [
-        {"key": "Cache-Control", "value": "no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0"}
-      ]
-    },
-    {
-      "source": "/(.*)",
-      "headers": [
-        {"key": "X-App-Build", "value": "2026-08-18-cachefix"}
-      ]
-    }
+  "headers":[
+    {"source":"/index.html","headers":[{"key":"Cache-Control","value":"no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0"}]},
+    {"source":"/(.*)","headers":[{"key":"X-App-Build","value":"functional-v1-20260818"}]}
   ]
 }
