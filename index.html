@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#0b0b0d" />
+  <title>墾丁拍攝行程｜10/17</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="icon.svg">
+  <style>
+    :root{
+      --bg:#0b0b0d;
+      --panel:#17171b;
+      --panel2:#202027;
+      --text:#f7f7f8;
+      --muted:#a7a7af;
+      --line:#34343c;
+      --accent:#77e4b1;
+      --accent2:#ffb4d8;
+      --warn:#ffd56f;
+      --danger:#ff7d8a;
+      --shadow:0 14px 35px rgba(0,0,0,.28);
+      --radius:22px;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","PingFang TC","Noto Sans TC","Segoe UI",sans-serif}
+    body{min-height:100vh}
+    .app{max-width:760px;margin:0 auto;padding:24px 18px 110px}
+    .topbar{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;margin-bottom:18px}
+    .eyebrow{font-size:14px;color:var(--muted);letter-spacing:.08em;margin-bottom:4px}
+    h1{font-size:31px;line-height:1.15;margin:0;font-weight:850;letter-spacing:-.02em}
+    .date-pill{
+      flex:0 0 auto;background:linear-gradient(135deg,#ff8f9b,#ffb7dc 48%,#8aa8ff);
+      color:#111;border-radius:18px;padding:10px 14px;font-weight:900;font-size:22px;box-shadow:var(--shadow)
+    }
+    .hero{
+      background:linear-gradient(180deg,#151519,#111114);
+      border:1px solid #27272e;border-radius:28px;padding:18px;box-shadow:var(--shadow);margin-bottom:20px
+    }
+    .hero-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+    .mini{background:#1e1e23;border-radius:18px;padding:14px 12px}
+    .mini span{display:block;color:var(--muted);font-size:12px;margin-bottom:4px}
+    .mini strong{font-size:18px}
+    .section-head{display:flex;align-items:center;justify-content:space-between;margin:22px 2px 12px}
+    .section-head h2{font-size:20px;margin:0}
+    .section-head small{color:var(--muted)}
+    .timeline{position:relative}
+    .timeline:before{
+      content:"";position:absolute;left:26px;top:12px;bottom:12px;width:2px;background:linear-gradient(var(--accent2),#8aa8ff,var(--accent))
+    }
+    .card{
+      position:relative;margin-left:54px;margin-bottom:14px;background:var(--panel);
+      border:1px solid #28282f;border-radius:var(--radius);padding:16px 16px 15px;box-shadow:0 8px 24px rgba(0,0,0,.18)
+    }
+    .dot{
+      position:absolute;left:-39px;top:21px;width:22px;height:22px;border-radius:50%;
+      background:var(--bg);border:5px solid var(--accent2);box-shadow:0 0 0 3px var(--bg)
+    }
+    .card.done{opacity:.62}
+    .card.done .title{text-decoration:line-through}
+    .card-top{display:flex;gap:12px;align-items:flex-start;justify-content:space-between}
+    .time{
+      font-size:29px;font-weight:900;letter-spacing:.01em;
+      background:linear-gradient(90deg,#ffb4d8,#9affb5,#fff59e,#89a8ff);
+      -webkit-background-clip:text;background-clip:text;color:transparent;white-space:nowrap
+    }
+    .title{font-size:18px;font-weight:800;line-height:1.35;margin-top:4px}
+    .sub{color:var(--muted);font-size:14px;margin-top:5px;line-height:1.55}
+    .tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px}
+    .tag{font-size:12px;background:var(--panel2);border:1px solid #303039;border-radius:999px;padding:7px 9px;color:#ddd}
+    .actions{display:flex;gap:8px;margin-top:13px;flex-wrap:wrap}
+    button,.btn{
+      border:0;border-radius:13px;background:#282830;color:white;padding:10px 12px;font-weight:700;font-size:14px;
+      text-decoration:none;display:inline-flex;align-items:center;gap:6px;cursor:pointer
+    }
+    .primary{background:var(--accent);color:#08130e}
+    .ghost{background:#24242a}
+    .danger{background:#342126;color:#ffb7c0}
+    .fab{
+      position:fixed;right:max(20px,calc((100vw - 760px)/2 + 20px));bottom:calc(24px + env(safe-area-inset-bottom));
+      width:66px;height:66px;border-radius:50%;background:#00d76f;color:#062c18;font-size:35px;font-weight:500;
+      box-shadow:0 14px 34px rgba(0,215,111,.28);z-index:20
+    }
+    .footer-note{color:var(--muted);font-size:12px;text-align:center;margin-top:18px}
+    dialog{
+      width:min(92vw,560px);border:1px solid #34343d;border-radius:24px;background:#151519;color:white;padding:0;box-shadow:var(--shadow)
+    }
+    dialog::backdrop{background:rgba(0,0,0,.68);backdrop-filter:blur(3px)}
+    .modal{padding:20px}
+    .modal h3{margin:0 0 14px;font-size:21px}
+    .field{margin-bottom:12px}
+    label{display:block;font-size:12px;color:var(--muted);margin-bottom:6px}
+    input,textarea{
+      width:100%;border:1px solid #34343d;background:#202026;color:white;border-radius:14px;padding:12px;font-size:16px;outline:none
+    }
+    textarea{min-height:92px;resize:vertical}
+    .modal-actions{display:flex;justify-content:flex-end;gap:9px;margin-top:14px}
+    .check{
+      width:32px;height:32px;padding:0;border-radius:50%;background:#24242a;color:#fff;font-size:18px;flex:0 0 auto
+    }
+    .empty{padding:30px;text-align:center;color:var(--muted);border:1px dashed #34343d;border-radius:20px}
+    @media(max-width:540px){
+      .app{padding:20px 14px 110px}
+      h1{font-size:27px}
+      .date-pill{font-size:19px}
+      .hero-grid{grid-template-columns:1fr}
+      .timeline:before{left:21px}
+      .card{margin-left:45px}
+      .dot{left:-34px}
+      .time{font-size:25px}
+    }
+  </style>
+</head>
+<body>
+  <main class="app">
+    <div class="topbar">
+      <div>
+        <div class="eyebrow">KENTING SHOOTING PLAN</div>
+        <h1>墾丁拍攝行程<br>規劃版</h1>
+      </div>
+      <div class="date-pill">10/17</div>
+    </div>
+
+    <section class="hero">
+      <div class="hero-grid">
+        <div class="mini"><span>集合</span><strong>05:30</strong></div>
+        <div class="mini"><span>出發</span><strong>07:00–07:30</strong></div>
+        <div class="mini"><span>首站抵達</span><strong>約 09:30</strong></div>
+      </div>
+    </section>
+
+    <div class="section-head">
+      <h2>📸 今日時間軸</h2>
+      <small id="progressText"></small>
+    </div>
+
+    <section class="timeline" id="timeline"></section>
+    <div class="footer-note">資料會保存在此裝置瀏覽器，可隨時新增或修改。</div>
+  </main>
+
+  <button class="fab" id="addBtn" aria-label="新增行程">＋</button>
+
+  <dialog id="editor">
+    <form method="dialog" class="modal" id="form">
+      <h3 id="modalTitle">新增行程</h3>
+      <input type="hidden" id="editId">
+      <div class="field">
+        <label>時間</label>
+        <input id="time" placeholder="例如 14:30 或 15:00～16:00" required>
+      </div>
+      <div class="field">
+        <label>標題</label>
+        <input id="title" placeholder="例如 民宿拍攝" required>
+      </div>
+      <div class="field">
+        <label>地點／導航搜尋文字</label>
+        <input id="place" placeholder="例如 屏鵝公路">
+      </div>
+      <div class="field">
+        <label>服裝</label>
+        <input id="outfit" placeholder="例如 男：白T＋牛仔褲／女：白色洋裝">
+      </div>
+      <div class="field">
+        <label>備註</label>
+        <textarea id="note" placeholder="拍攝時間、補妝、道具、注意事項…"></textarea>
+      </div>
+      <div class="modal-actions">
+        <button type="button" class="ghost" id="cancelBtn">取消</button>
+        <button type="submit" class="primary">儲存</button>
+      </div>
+    </form>
+  </dialog>
+
+<script>
+const seed = [
+  {
+    id: crypto.randomUUID(),
+    time: "05:30",
+    title: "抵達造型工作室",
+    place: "",
+    outfit: "",
+    note: "梳化、造型準備。",
+    done: false
+  },
+  {
+    id: crypto.randomUUID(),
+    time: "07:00～07:30",
+    title: "出發前往墾丁",
+    place: "墾丁",
+    outfit: "",
+    note: "確認器材、服裝與隨身物品後出發。",
+    done: false
+  },
+  {
+    id: crypto.randomUUID(),
+    time: "約 09:30",
+    title: "第一站｜屏鵝公路煮咖啡景點（海景）",
+    place: "屏鵝公路",
+    outfit: "男生：牛仔褲＋白 T＋黑色西裝外套｜女生：白色仙氣洋裝",
+    note: "預計拍攝 1 小時。",
+    done: false
+  },
+  {
+    id: crypto.randomUUID(),
+    time: "中午",
+    title: "休息＋午餐＋補妝",
+    place: "熊家豬腳",
+    outfit: "",
+    note: "午餐暫定熊家豬腳或早餐，休息後順便補妝。",
+    done: false
+  },
+  {
+    id: crypto.randomUUID(),
+    time: "下午",
+    title: "前往民宿拍攝",
+    place: "",
+    outfit: "",
+    note: "抵達後依現場光線與空間安排拍攝。",
+    done: false
+  },
+  {
+    id: crypto.randomUUID(),
+    time: "入住後",
+    title: "換白紗拍攝",
+    place: "",
+    outfit: "白紗",
+    note: "入住民宿後換裝，再進行白紗拍攝。",
+    done: false
+  }
+];
+
+const STORAGE = "kenting-shooting-plan-v1";
+let items = JSON.parse(localStorage.getItem(STORAGE) || "null") || seed;
+
+const timeline = document.getElementById("timeline");
+const editor = document.getElementById("editor");
+const form = document.getElementById("form");
+const modalTitle = document.getElementById("modalTitle");
+
+function save(){
+  localStorage.setItem(STORAGE, JSON.stringify(items));
+  render();
+}
+function mapsUrl(place){
+  return "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(place);
+}
+function escapeHtml(s=""){
+  return s.replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
+}
+function render(){
+  timeline.innerHTML = "";
+  if(!items.length){
+    timeline.innerHTML = '<div class="empty">還沒有行程，按右下角 ＋ 新增。</div>';
+  }
+  items.forEach(item=>{
+    const card = document.createElement("article");
+    card.className = "card" + (item.done ? " done" : "");
+    card.innerHTML = `
+      <div class="dot"></div>
+      <div class="card-top">
+        <div>
+          <div class="time">${escapeHtml(item.time)}</div>
+          <div class="title">${escapeHtml(item.title)}</div>
+          ${item.place ? `<div class="sub">📍 ${escapeHtml(item.place)}</div>` : ""}
+        </div>
+        <button class="check" data-action="done" data-id="${item.id}" title="完成">${item.done ? "✓" : "○"}</button>
+      </div>
+      <div class="tags">
+        ${item.outfit ? `<span class="tag">👔 ${escapeHtml(item.outfit)}</span>` : ""}
+        ${item.note ? `<span class="tag">📝 ${escapeHtml(item.note)}</span>` : ""}
+      </div>
+      <div class="actions">
+        ${item.place ? `<a class="btn primary" target="_blank" rel="noopener" href="${mapsUrl(item.place)}">🧭 導航</a>` : ""}
+        <button class="ghost" data-action="edit" data-id="${item.id}">✏️ 編輯</button>
+        <button class="danger" data-action="delete" data-id="${item.id}">🗑️ 刪除</button>
+      </div>`;
+    timeline.appendChild(card);
+  });
+  const done = items.filter(x=>x.done).length;
+  document.getElementById("progressText").textContent = `${done}/${items.length} 完成`;
+}
+function openEditor(item=null){
+  modalTitle.textContent = item ? "編輯行程" : "新增行程";
+  document.getElementById("editId").value = item?.id || "";
+  document.getElementById("time").value = item?.time || "";
+  document.getElementById("title").value = item?.title || "";
+  document.getElementById("place").value = item?.place || "";
+  document.getElementById("outfit").value = item?.outfit || "";
+  document.getElementById("note").value = item?.note || "";
+  editor.showModal();
+}
+document.getElementById("addBtn").onclick = ()=>openEditor();
+document.getElementById("cancelBtn").onclick = ()=>editor.close();
+
+timeline.addEventListener("click", e=>{
+  const btn = e.target.closest("[data-action]");
+  if(!btn) return;
+  const id = btn.dataset.id;
+  const action = btn.dataset.action;
+  const item = items.find(x=>x.id===id);
+  if(action==="done"){
+    item.done = !item.done; save();
+  } else if(action==="edit"){
+    openEditor(item);
+  } else if(action==="delete"){
+    if(confirm("確定要刪除這筆行程嗎？")){
+      items = items.filter(x=>x.id!==id); save();
+    }
+  }
+});
+
+form.addEventListener("submit", e=>{
+  e.preventDefault();
+  const id = document.getElementById("editId").value;
+  const data = {
+    time: document.getElementById("time").value.trim(),
+    title: document.getElementById("title").value.trim(),
+    place: document.getElementById("place").value.trim(),
+    outfit: document.getElementById("outfit").value.trim(),
+    note: document.getElementById("note").value.trim()
+  };
+  if(!data.time || !data.title) return;
+  if(id){
+    const item = items.find(x=>x.id===id);
+    Object.assign(item,data);
+  }else{
+    items.push({id:crypto.randomUUID(), ...data, done:false});
+  }
+  editor.close();
+  save();
+});
+
+render();
+
+if("serviceWorker" in navigator){
+  window.addEventListener("load", ()=>navigator.serviceWorker.register("sw.js").catch(()=>{}));
+}
+</script>
+</body>
+</html>
