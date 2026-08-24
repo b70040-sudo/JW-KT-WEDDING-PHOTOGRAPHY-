@@ -12,305 +12,171 @@
 <title>墾丁拍攝行程</title>
 <style>
 :root{
- --bg:#07101d;--panel:#0e2037;--panel2:#102846;--line:#244464;--text:#f8fafc;--muted:#a8b8cc;
- --cyan:#48c6ff;--sky:#79d5ff;--gold:#ffc95e;--green:#62e3ad;--pink:#f89bbd;--purple:#ad8cff;
+ --bg:#07101d;--panel:#0e2037;--panel2:#112944;--line:#284969;--text:#f7fafc;--muted:#a8b8cc;
+ --cyan:#59cfff;--green:#6ee7b7;--gold:#ffc95e;--red:#fb7185;
 }
 *{box-sizing:border-box}
 html{background:var(--bg);scroll-behavior:smooth}
-body{margin:0;background:linear-gradient(180deg,#07101d,#09172a 55%,#07101d);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","PingFang TC","Noto Sans TC",sans-serif}
+body{margin:0;background:linear-gradient(180deg,#07101d,#09172a 56%,#07101d);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"PingFang TC","Noto Sans TC",sans-serif}
 button,a{font:inherit;-webkit-tap-highlight-color:transparent}
-.app{max-width:640px;margin:auto;padding:0 15px calc(102px + env(safe-area-inset-bottom));min-height:100vh}
-.safe{height:env(safe-area-inset-top);margin:0 -15px;background:#07101d}
-.header{padding:22px 4px 14px}
-.topline{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
-.brand{font-size:12px;font-weight:950;letter-spacing:.19em;color:var(--sky)}
-.iconbtn{width:42px;height:42px;border-radius:14px;border:1px solid var(--line);background:#0b1c31;color:white;font-size:21px;display:grid;place-items:center}
-.title{font-size:32px;font-weight:950;letter-spacing:-.02em;margin:0}
-.subtitle{margin-top:9px;color:var(--muted);font-size:14px;line-height:1.5}
-.weather{display:flex;align-items:center;gap:8px;border:1px solid var(--line);background:#102844;border-radius:16px;padding:9px 12px;color:white}
-.weather small{display:block;color:var(--muted);font-size:10px}
-
-.hero{border:1px solid #294a6d;border-radius:26px;overflow:hidden;background:#0e2037;box-shadow:0 18px 45px #0005}
-.hero-photo{height:320px;position:relative;background:linear-gradient(180deg,#0000 25%,#07101ddd 100%),url('kentimg.jpg') center/cover}
-.hero-toolbar{position:absolute;left:16px;right:16px;bottom:15px;display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
-.action-tile{border:1px solid #35536e;background:#091726e9;color:white;border-radius:15px;padding:11px 5px;font-size:11px;font-weight:900}
-.action-tile span{font-size:20px;display:block;margin-bottom:4px}
-.hero-body{padding:18px}
-.label{font-size:12px;color:var(--muted)}
-.bigdate{font-size:48px;font-weight:950;line-height:1;margin:8px 0 13px}
-.bigdate small{font-size:18px;color:#b8c7db}
-.tags{display:flex;gap:8px;flex-wrap:wrap}.tag{background:#09334f;color:#d7f4ff;border:1px solid #145178;border-radius:999px;padding:7px 10px;font-size:12px;font-weight:900}
-
-.quick-cards{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
-.info-card{border:1px solid var(--line);border-radius:20px;background:linear-gradient(180deg,#102744,#0d1d33);padding:16px}
-.info-card small{color:var(--muted)}.info-card b{font-size:18px;display:block;margin:5px 0}.info-card span{font-size:12px;color:#bac8d9}
-
-.heading{font-size:20px;font-weight:950;margin:25px 2px 12px}
-.routebox{border:1px solid var(--line);border-radius:20px;background:#0c1e34;padding:14px;display:flex;gap:9px;align-items:center;flex-wrap:wrap}
-.route{border:1px solid #305577;background:#102b49;color:#fff;border-radius:14px;padding:9px 12px;font-weight:900;cursor:pointer}
-.arr{color:var(--cyan);font-size:20px}
-.reminder{margin:14px 0;border:1px solid #8a6820;border-left:5px solid var(--gold);background:#2a2413;border-radius:18px;padding:14px;display:flex;gap:12px;align-items:center;cursor:pointer}
-.reminder .ico{font-size:27px}.reminder b{display:block}.reminder small{display:block;color:#e9ddbd;margin-top:4px;line-height:1.45}
-
+.app{max-width:640px;margin:auto;padding:0 14px calc(92px + env(safe-area-inset-bottom));min-height:100vh}
+.safe{height:env(safe-area-inset-top);margin:0 -14px;background:#07101d}
+.header{padding:20px 3px 12px}.brand{color:var(--cyan);font-size:12px;font-weight:950;letter-spacing:.16em}.header h1{font-size:30px;margin:7px 0 7px}.sub{font-size:13px;color:var(--muted);line-height:1.55}
+.hero{border:1px solid var(--line);border-radius:24px;overflow:hidden;background:var(--panel);box-shadow:0 16px 42px #0004}
+.heroimg{height:240px;background:linear-gradient(180deg,#0000 32%,#07101ddd),url('kentimg.jpg') center/cover}
+.herobody{padding:17px}.date{font-size:46px;font-weight:950;margin:4px 0 10px}.date small{font-size:17px;color:#b8c7db}
+.tags{display:flex;gap:7px;flex-wrap:wrap}.tag{background:#0b3551;border:1px solid #155479;color:#d8f4ff;border-radius:999px;padding:7px 10px;font-size:12px;font-weight:900}
 .section{display:none}.section.active{display:block}
-.day{border:1px solid var(--line);border-radius:20px;background:#0d1f35;margin:11px 0;overflow:hidden}
-.day summary{list-style:none;cursor:pointer;padding:15px;display:flex;justify-content:space-between;align-items:center;font-weight:950}
-.day summary::-webkit-details-marker{display:none}.day[open] summary{border-bottom:1px solid var(--line)}
-.item{display:grid;grid-template-columns:86px 1fr auto;gap:10px;align-items:center;padding:12px 14px;border-bottom:1px solid #203852}
-.item:last-child{border-bottom:0}.time{color:var(--sky);font-weight:950}.event{font-weight:850;font-size:14px}.event small{display:block;color:var(--muted);font-weight:500;font-size:11px;margin-top:3px;line-height:1.4}
-.tick{width:28px;height:28px;border-radius:50%;border:2px solid var(--sky);background:transparent;color:#062118;font-weight:950}.tick.done{background:var(--green);border-color:var(--green)}
-.maplink{display:inline-block;margin-top:7px;text-decoration:none;background:#dff6ff;color:#06233c;font-size:11px;font-weight:950;border-radius:10px;padding:6px 9px}
-.progress{padding:11px 14px 14px}.progressline{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-bottom:6px}.track{height:8px;background:#182b42;border-radius:999px;overflow:hidden}.fill{height:100%;background:linear-gradient(90deg,var(--cyan),var(--green));width:0}
-
-.mapcard,.morecard{border:1px solid var(--line);border-radius:20px;background:#0d1f35;padding:16px;margin:10px 0}
-.map-preview{height:155px;border-radius:16px;background:linear-gradient(135deg,#0f3955,#173a59);display:grid;place-items:center;text-align:center;color:#d9f2ff;margin:12px 0;border:1px dashed #4b7599}
-.primary{display:flex;width:100%;justify-content:center;text-decoration:none;border:0;border-radius:14px;background:#dcf6ff;color:#08233a;font-weight:950;padding:12px;margin-top:8px}
-.secondary{background:#173856;color:white;border:1px solid #315b80}
-.checkrow{display:flex;gap:10px;align-items:flex-start;padding:11px 0;border-bottom:1px solid #203852}.checkrow:last-child{border-bottom:0}.checkrow input{width:20px;height:20px;accent-color:var(--green);margin-top:1px}.checkrow label{font-size:14px;line-height:1.4}
-.tools{display:grid;grid-template-columns:1fr 1fr;gap:10px}.tool{border:1px solid var(--line);background:#102640;color:white;border-radius:18px;padding:16px;text-align:left}.tool .ti{font-size:28px}.tool b{display:block;margin-top:7px}.tool small{display:block;color:var(--muted);line-height:1.4;margin-top:4px}
-textarea{width:100%;min-height:150px;border:1px solid var(--line);background:#071725;color:white;border-radius:14px;padding:12px;font-size:15px}
-
-.tabs{position:fixed;left:50%;bottom:0;transform:translateX(-50%);width:min(640px,100%);display:grid;grid-template-columns:repeat(5,1fr);background:#07101df2;backdrop-filter:blur(18px);border-top:1px solid #223c58;padding:7px 5px calc(7px + env(safe-area-inset-bottom));z-index:30}
-.tabs button{border:0;background:none;color:#94a5b8;font-size:10px;font-weight:900;padding:6px 2px}.tabs button.active{color:var(--cyan)}.tabs span{display:block;font-size:21px;margin-bottom:2px}
-
-.drawer{position:fixed;inset:0;z-index:50;pointer-events:none}.drawer.show{pointer-events:auto}.shade{position:absolute;inset:0;background:#0009;opacity:0;transition:.2s}.drawer.show .shade{opacity:1}.sheet{position:absolute;left:0;top:0;bottom:0;width:min(82vw,330px);background:#091727;border-right:1px solid var(--line);padding:calc(20px + env(safe-area-inset-top)) 18px 20px;transform:translateX(-100%);transition:.25s}.drawer.show .sheet{transform:translateX(0)}.sheet h3{margin:0 0 18px}.menuitem{width:100%;text-align:left;border:0;background:#10243c;color:#fff;border-radius:14px;padding:13px;margin:6px 0;font-weight:850}
-
-dialog{width:min(92vw,520px);border:1px solid var(--line);border-radius:22px;background:#0c1c2e;color:white;padding:0;max-height:82vh}
-dialog::backdrop{background:#000b;backdrop-filter:blur(3px)}.modal{padding:18px}.modalhead{display:flex;justify-content:space-between;align-items:center}.close{border:0;border-radius:12px;background:#1b3048;color:#fff;padding:8px 10px}.tip{background:#10263f;border-radius:14px;padding:12px;margin:8px 0}.tip b{display:block}.tip p{margin:5px 0 0;color:var(--muted);font-size:13px;line-height:1.5}
-
-.flash{animation:flash 1.2s ease}
-@keyframes flash{0%,100%{box-shadow:none}40%{box-shadow:0 0 0 3px #55d4ff,0 0 30px #55d4ff88}}
-@media(max-width:430px){.hero-photo{height:280px}.hero-toolbar{grid-template-columns:repeat(2,1fr)}.quick-cards,.tools{grid-template-columns:1fr}.item{grid-template-columns:76px 1fr auto}.bigdate{font-size:43px}}
-
-.notify-btn{position:relative}
-.notify-dot{position:absolute;right:4px;top:4px;width:9px;height:9px;border-radius:50%;background:#fb7185;box-shadow:0 0 0 2px #07101d}
-.reminder-title{font-size:12px;color:var(--sky);font-weight:950;letter-spacing:.08em;margin:15px 0 8px}
-.reminder-row{display:flex;gap:10px;align-items:flex-start;background:#10263f;border:1px solid #244464;border-radius:14px;padding:11px 12px;margin-bottom:8px}
-.reminder-row .r-ico{font-size:20px}.reminder-row b{display:block;font-size:14px}.reminder-row small{display:block;color:var(--muted);font-size:12px;line-height:1.55;margin-top:3px}
+.heading{font-size:20px;font-weight:950;margin:23px 2px 11px}
+.card{border:1px solid var(--line);background:linear-gradient(180deg,var(--panel2),var(--panel));border-radius:20px;padding:15px;margin:10px 0}
+.quickgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.quick{border:1px solid var(--line);background:#102942;color:white;border-radius:18px;padding:15px;text-align:left}.quick .ico{font-size:25px}.quick b{display:block;margin-top:7px}.quick small{display:block;color:var(--muted);font-size:11px;margin-top:4px;line-height:1.4}
+.route{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.node{border:1px solid #335a7b;background:#102d4a;color:white;border-radius:13px;padding:9px 11px;font-size:12px;font-weight:900}.arrow{color:var(--cyan)}
+.day{border:1px solid var(--line);border-radius:20px;background:#0d2036;margin:10px 0;overflow:hidden}.day summary{list-style:none;cursor:pointer;padding:14px 15px;display:flex;justify-content:space-between;font-weight:950}.day summary::-webkit-details-marker{display:none}.day[open] summary{border-bottom:1px solid var(--line)}
+.item{display:grid;grid-template-columns:88px 1fr auto;gap:9px;align-items:center;padding:12px 13px;border-bottom:1px solid #203c58}.item:last-child{border-bottom:0}.time{color:var(--cyan);font-weight:950}.event{font-size:14px;font-weight:850;line-height:1.4}.event small{display:block;color:var(--muted);font-size:11px;font-weight:500;margin-top:3px}.tick{width:27px;height:27px;border-radius:50%;border:2px solid var(--cyan);background:transparent;color:#062118;font-weight:950}.tick.done{background:var(--green);border-color:var(--green)}
+.progress{padding:10px 13px 13px}.progressline{display:flex;justify-content:space-between;color:var(--muted);font-size:11px;margin-bottom:6px}.track{height:8px;background:#1a2e45;border-radius:999px;overflow:hidden}.fill{height:100%;width:0;background:linear-gradient(90deg,var(--cyan),var(--green))}
+.linkcard{display:flex;align-items:center;gap:12px;border:1px solid var(--line);background:#0f2238;border-radius:17px;padding:13px;margin:9px 0;text-decoration:none;color:white}.linkcard .ico{font-size:26px;width:34px;text-align:center}.linkcard b{display:block}.linkcard small{display:block;color:var(--muted);font-size:11px;margin-top:3px}.linkcard .go{margin-left:auto;color:var(--cyan);font-size:20px}
+.reminderbox{border-left:4px solid var(--gold)}.alert{border-left-color:var(--red)}.remtitle{font-size:12px;color:var(--cyan);font-weight:950;letter-spacing:.08em;margin-bottom:10px}.row{display:flex;gap:10px;padding:9px 0;border-bottom:1px solid #213d59}.row:last-child{border-bottom:0}.row .ico{font-size:19px}.row b{font-size:14px;display:block}.row small{display:block;color:var(--muted);font-size:12px;line-height:1.5;margin-top:3px}
+.checkrow{display:flex;gap:10px;align-items:flex-start;padding:10px 0;border-bottom:1px solid #203c58}.checkrow:last-child{border-bottom:0}.checkrow input{width:20px;height:20px;accent-color:var(--green)}.checkrow label{font-size:14px;line-height:1.4}
+textarea{width:100%;min-height:130px;background:#071725;color:white;border:1px solid var(--line);border-radius:14px;padding:12px;font-size:15px;resize:vertical}
+.btn{display:block;width:100%;border:0;border-radius:14px;background:#dbf5ff;color:#07223a;font-weight:950;padding:12px;text-align:center;text-decoration:none;margin-top:10px}
+.btn.secondary{background:#183a58;color:white;border:1px solid #315b80}
+.tabs{position:fixed;left:50%;bottom:0;transform:translateX(-50%);width:min(640px,100%);display:grid;grid-template-columns:repeat(4,1fr);background:#07101df3;backdrop-filter:blur(18px);border-top:1px solid #223d59;padding:7px 5px calc(7px + env(safe-area-inset-bottom));z-index:20}.tabs button{border:0;background:none;color:#94a5b8;font-size:10px;font-weight:900;padding:7px 2px}.tabs button.active{color:var(--cyan)}.tabs span{display:block;font-size:22px;margin-bottom:2px}
+.build{text-align:center;color:#63798f;font-size:10px;padding:18px}
+@media(max-width:430px){.heroimg{height:215px}.quickgrid{grid-template-columns:1fr}.item{grid-template-columns:80px 1fr auto}.date{font-size:41px}}
 </style>
 </head>
 <body>
-<div class="app">
-<div class="safe"></div>
+<div class="app"><div class="safe"></div>
 
 <section id="home" class="section active">
-<header class="header">
-  <div class="topline">
-    <button class="iconbtn" id="menuBtn">☰</button>
-    <div class="brand">JW · KENTING SHOOTING</div>
-    <button class="iconbtn notify-btn" id="notifyBtn" aria-label="提醒事項">🔔<span class="notify-dot"></span></button><button class="weather" id="weatherBtn"><span>🌤️</span><div><b>天氣</b><small>點擊查看</small></div></button>
-  </div>
-  <h1 class="title">墾丁拍攝行程 📷</h1>
-  <div class="subtitle">10/17～10/18｜婚紗・海景・民宿・輕寫真</div><div style="margin-top:7px;color:#62e3ad;font-size:11px;font-weight:900">UPDATED 08/24 · LINKS V6</div>
-</header>
+<header class="header"><div class="brand">JW · KENTING SHOOTING</div><h1>墾丁拍攝行程 📷</h1><div class="sub">10/17～10/18｜婚紗・海景・民宿・輕寫真</div></header>
+<div class="hero"><div class="heroimg"></div><div class="herobody"><div class="sub">拍攝日期</div><div class="date">10/17 <small>～ 10/18</small></div><div class="tags"><span class="tag">👰 白紗＋黑紗</span><span class="tag">🏡 日日旅海</span><span class="tag">🌊 海邊＋草皮</span></div></div></div>
 
-<div class="hero">
-  <div class="hero-photo">
-    <div class="hero-toolbar">
-      <button class="action-tile" onclick="switchTab('map')"><span>📍</span>快速導航</button>
-      <button class="action-tile" onclick="switchTab('check')"><span>🧳</span>攜帶清單</button>
-      <button class="action-tile" onclick="openDialog('tips')"><span>📷</span>拍攝提醒</button>
-      <button class="action-tile" onclick="openMemo()"><span>📝</span>臨時備忘</button>
-    </div>
-  </div>
-  <div class="hero-body">
-    <div class="label">拍攝日期</div>
-    <div class="bigdate">10/17 <small>～ 10/18</small></div>
-    <div class="tags"><span class="tag">👰 白紗＋黑紗</span><span class="tag">🏡 日日旅海</span><span class="tag">🌊 室內＋海邊</span></div>
-  </div>
-</div>
-
-<div class="quick-cards">
-  <button class="info-card" onclick="switchTab('plan');highlightDay('day1box')"><small>Day 1 開始</small><b>08:00 星巴克化妝</b><span>10:00 恆春東門第一套</span></button>
-  <button class="info-card" onclick="switchTab('plan');highlightDay('day2box')"><small>Day 2 開始</small><b>04:00 化妝</b><span>06:00 海邊拍日出</span></button>
+<div class="heading">快速入口</div>
+<div class="quickgrid">
+  <button class="quick" onclick="switchTab('plan')"><div class="ico">🗓️</div><b>拍攝行程</b><small>10/17、10/18 全部時間與完成勾選</small></button>
+  <button class="quick" onclick="switchTab('links')"><div class="ico">🔗</div><b>地點與連結</b><small>所有 Google Maps 與日日旅海官網集中在這裡</small></button>
+  <button class="quick" onclick="switchTab('reminders')"><div class="ico">🔔</div><b>提醒中心</b><small>房間、退房、入園、器材與拍攝提醒統一收納</small></button>
+  <button class="quick" onclick="switchTab('reminders');setTimeout(()=>document.getElementById('memo').focus(),250)"><div class="ico">📝</div><b>臨時備忘</b><small>拍攝現場交代事項自動保存</small></button>
 </div>
 
 <div class="heading">10/17 快速路線</div>
-<div class="routebox">
-  <button class="route" onclick="window.open(MAP_STARBUCKS,'_blank')">☕ 星巴克</button><span class="arr">→</span>
-  <button class="route" onclick="window.open(MAP_EAST,'_blank')">🏯 東門</button><span class="arr">→</span>
-  <button class="route" onclick="window.open(MAP_LUNCH,'_blank')">🍽️ 午餐</button><span class="arr">→</span>
-  <button class="route" onclick="window.open(MAP_STAY,'_blank')">🏡 民宿</button><span class="arr">→</span>
-  <button class="route" onclick="gotoEvent('day1',5)">👰 白紗</button><span class="arr">→</span>
-  <button class="route" onclick="gotoEvent('day1',6)">🌅 黃昏</button><span class="arr">→</span>
-  <button class="route" onclick="gotoEvent('day1',8)">🖤 黑紗</button>
-</div>
-<div class="reminder" onclick="openDialog('tips')"><div class="ico">📌</div><div><b>拍攝提醒</b><small>11:00 前退房；器材可先放 1920，11:00 後換裝皆在 1920 處理。</small></div><div>›</div></div><div class="reminder" onclick="openDialog('reminders')"><div class="ico">🔔</div><div><b>住宿／退房／入園提醒</b><small>房間安排、11:00 前退房、1920 換裝與日日旅海須知。</small></div><div>›</div></div>
+<div class="card"><div class="route">
+<span class="node">☕ 星巴克</span><span class="arrow">→</span><span class="node">🏯 東門</span><span class="arrow">→</span><span class="node">🍽️ 轟稻機</span><span class="arrow">→</span><span class="node">🏡 日日旅海</span><span class="arrow">→</span><span class="node">👰 白紗</span><span class="arrow">→</span><span class="node">🌅 黃昏</span><span class="arrow">→</span><span class="node">🖤 黑紗</span>
+</div></div>
+<div class="card reminderbox" onclick="switchTab('reminders')" style="cursor:pointer"><b>🔔 重要提醒</b><div class="sub">11:00 前退房；器材可先放 1920；11:00 後換裝統一在 1920。</div></div>
 </section>
 
 <section id="plan" class="section">
-<header class="header"><div class="brand">ITINERARY</div><h1 class="title">拍攝行程</h1><div class="subtitle">點選右側圓圈可標記完成。</div></header>
-<details class="day" id="day1box" open><summary><span>📅 10/17｜主要拍攝日</span><span>⌄</span></summary><div id="day1"></div><div class="progress"><div class="progressline"><span id="d1text"></span><span id="d1pct"></span></div><div class="track"><div class="fill" id="d1fill"></div></div></div></details>
-<details class="day" id="day2box"><summary><span>🌅 10/18｜晨間寫真</span><span>⌄</span></summary><div id="day2"></div><div class="progress"><div class="progressline"><span id="d2text"></span><span id="d2pct"></span></div><div class="track"><div class="fill" id="d2fill"></div></div></div></details>
+<header class="header"><div class="brand">ITINERARY</div><h1>拍攝行程</h1><div class="sub">點右側圓圈即可標記完成。</div></header>
+<details class="day" open><summary><span>📅 10/17｜主要拍攝日</span><span>⌄</span></summary><div id="day1"></div><div class="progress"><div class="progressline"><span id="d1text"></span><span id="d1pct"></span></div><div class="track"><div class="fill" id="d1fill"></div></div></div></details>
+<details class="day"><summary><span>🌅 10/18｜晨間拍攝</span><span>⌄</span></summary><div id="day2"></div><div class="progress"><div class="progressline"><span id="d2text"></span><span id="d2pct"></span></div><div class="track"><div class="fill" id="d2fill"></div></div></div></details>
 </section>
 
-<section id="map" class="section">
-<header class="header"><div class="brand">LOCATION</div><h1 class="title">地點與導航</h1><div class="subtitle">常用地點直接開啟 Google Maps。</div></header>
-<div class="mapcard"><b>🍽️ 轟稻機 Hometown</b><div class="subtitle">10/17 13:00 午餐</div><div class="map-preview">恆春午餐<br>↓<br>下一站：日日旅海</div><a class="primary" href="#" onclick="window.open(MAP_LUNCH,'_blank');return false">📍 開啟 Google Maps</a></div>
-<div class="mapcard"><b>🏯 恆春古城東門</b><div class="subtitle">10/17 10:00 第一套拍攝</div><div class="map-preview">恆春古城東門<br>第一套造型拍攝</div><a class="primary" href="#" onclick="window.open(MAP_EAST,'_blank');return false">📍 Google Maps 導航</a></div>
-<div class="mapcard"><b>🏡 日日旅海</b><div class="subtitle">屏東縣滿州鄉興海路 33 號</div><div class="map-preview">約 14:00 民宿拍攝<br>15:00 入住・白紗室內＆海邊</div><a class="primary" href="#" onclick="window.open(MAP_STAY,'_blank');return false">📍 開啟 Google Maps</a><a class="primary secondary" href="https://www.oceandayhotel.com" target="_blank" rel="noopener">🌐 日日旅海官方網站</a></div>
+<section id="links" class="section">
+<header class="header"><div class="brand">LINKS</div><h1>地點與連結</h1><div class="sub">所有導航與網站統一集中在這一頁。</div></header>
+<a class="linkcard" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Starbucks%20%E6%81%86%E6%98%A5"><div class="ico">☕</div><div><b>恆春星巴克</b><small>10/17 08:00｜化妝＋早餐</small></div><div class="go">›</div></a>
+<a class="linkcard" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=%E6%81%86%E6%98%A5%E5%8F%A4%E5%9F%8E%E6%9D%B1%E9%96%80%20%E5%B1%8F%E6%9D%B1%E7%B8%A3%E6%81%86%E6%98%A5%E9%8E%AE%E6%9D%B1%E9%96%80%E8%B7%AF"><div class="ico">🏯</div><div><b>恆春古城東門</b><small>10/17 10:00｜第一套拍攝</small></div><div class="go">›</div></a>
+<a class="linkcard" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=%E8%BD%9F%E7%A8%BB%E6%A9%9F%20Hometown%20%E6%81%86%E6%98%A5"><div class="ico">🍽️</div><div><b>轟稻機 Hometown</b><small>10/17 12:00｜午餐＋補妝</small></div><div class="go">›</div></a>
+<a class="linkcard" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=%E6%97%A5%E6%97%A5%E6%97%85%E6%B5%B7%20Ocean%20Day%20by%20Day%20Hotel%20%E5%B1%8F%E6%9D%B1%E7%B8%A3%E6%BB%BF%E5%B7%9E%E9%84%89%E8%88%88%E6%B5%B7%E8%B7%AF33%E8%99%9F"><div class="ico">🏡</div><div><b>日日旅海｜Google Maps</b><small>屏東縣滿州鄉興海路 33 號</small></div><div class="go">›</div></a>
+<a class="linkcard" target="_blank" rel="noopener" href="https://www.oceandayhotel.com/"><div class="ico">🌐</div><div><b>日日旅海｜官方網站</b><small>住宿、房型、咖啡廳與官方資訊</small></div><div class="go">›</div></a>
 </section>
 
-<section id="check" class="section">
-<header class="header"><div class="brand">CHECKLIST</div><h1 class="title">婚紗攜帶清單</h1><div class="subtitle">勾選狀態會自動保存在這支手機。</div></header>
-<div class="morecard" id="checklist"></div>
-<button class="primary secondary" onclick="resetChecklist()">清除全部勾選</button>
-</section>
+<section id="reminders" class="section">
+<header class="header"><div class="brand">REMINDERS</div><h1>提醒中心 🔔</h1><div class="sub">所有提醒、房間、清單與備忘集中在同一區。</div></header>
 
-<section id="more" class="section">
-<header class="header"><div class="brand">MORE</div><h1 class="title">更多功能</h1><div class="subtitle">拍攝當天常用的小工具。</div></header>
-<div class="tools">
- <button class="tool" onclick="switchTab('check')"><div class="ti">🧳</div><b>婚紗攜帶清單</b><small>逐項確認用品。</small></button>
- <button class="tool" onclick="openDialog('tips')"><div class="ti">📷</div><b>拍攝提醒</b><small>海邊、換裝與黑紗注意事項。</small></button>
- <button class="tool" onclick="switchTab('map')"><div class="ti">🗺️</div><b>快速導航</b><small>午餐與民宿。</small></button>
- <button class="tool" onclick="openMemo()"><div class="ti">📝</div><b>臨時備忘</b><small>記錄現場交代事項。</small></button>
+<div class="card reminderbox">
+<div class="remtitle">住宿／房間安排</div>
+<div class="row"><div class="ico">📷</div><div><b>拍攝房</b><small>1930／3F 1910（扶手較寬）</small></div></div>
+<div class="row"><div class="ico">👰</div><div><b>宇＆淇</b><small>1920（置物）＋1930（住）1樓</small></div></div>
+<div class="row"><div class="ico">👨‍👩‍👧</div><div><b>小宇家人</b><small>1990（爸）／2000（妹）</small></div></div>
+<div class="row"><div class="ico">👨‍👩‍👧‍👦</div><div><b>淇淇家人</b><small>1940／2010</small></div></div>
+<div class="row"><div class="ico">🛏️</div><div><b>其他</b><small>V哥 1960｜彥文 1980｜阿伯 1900｜造型師 1950｜1970 空房</small></div></div>
 </div>
+
+<div class="card reminderbox alert">
+<div class="remtitle">退房／器材／換裝</div>
+<div class="row"><div class="ico">⏰</div><div><b>11:00 前退房</b><small>務必在 11:00 前完成退房。</small></div></div>
+<div class="row"><div class="ico">🎒</div><div><b>器材可放 1920</b><small>退房後仍有拍攝需求，可先把器材放在 1920。</small></div></div>
+<div class="row"><div class="ico">👗</div><div><b>11:00 後換裝</b><small>所有換裝需求統一在 1920 處理。</small></div></div>
+</div>
+
+<div class="card reminderbox">
+<div class="remtitle">日日旅海／入園須知</div>
+<div class="row"><div class="ico">🌿</div><div><b>對外開放區域</b><small>咖啡廳＋戶外草皮區｜11:00～16:30。其餘時間非住客請勿逗留旅店區域。</small></div></div>
+<div class="row"><div class="ico">☕</div><div><b>Ocean Day Cafe</b><small>每週六、日、一｜11:00～18:00｜最後點餐 17:30。</small></div></div>
+</div>
+
+<div class="card reminderbox">
+<div class="remtitle">拍攝提醒</div>
+<div class="row"><div class="ico">🌅</div><div><b>日出</b><small>10/18 06:00～07:00 海邊拍日出，04:00 開始化妝。</small></div></div>
+<div class="row"><div class="ico">🌊</div><div><b>海邊用品</b><small>拖鞋、毛巾、防曬、防蚊、飲水與固定髮型用品。</small></div></div>
+<div class="row"><div class="ico">🖤</div><div><b>黑紗微光</b><small>20:00～21:00 換黑紗，21:00～22:00 戶外＋室內微光拍攝。</small></div></div>
+</div>
+
+<div class="heading">婚紗攜帶清單</div>
+<div class="card" id="checklist"></div>
+<button class="btn secondary" onclick="resetChecklist()">清除全部勾選</button>
+
 <div class="heading">臨時備忘</div>
-<div class="morecard"><textarea id="memo" placeholder="攝影師交代事項、要補拍的畫面、臨時要帶的東西…"></textarea><div class="subtitle">輸入後自動保存。</div></div>
-<div class="heading">房間安排</div><div class="morecard">
-<b>🏠 墾丁房間安排</b><div class="subtitle" style="margin-top:10px;line-height:1.9">
-📷 拍攝房：1930／3F 1910（扶手較寬）<br>
-👥 宇＆淇：1920（置物）＋1930（住）1樓<br>
-👤 V哥：1960<br>👤 彥文：1980<br>👤 阿伯：1900<br>💄 造型師：1950
-</div></div>
-<div class="heading">退房與換裝提醒</div><div class="morecard">
-<b>⏰ 11:00 前退房</b><div class="subtitle" style="margin-top:8px;line-height:1.8">如有拍攝需求，器材可先放 1920。<br>11:00 後所有換裝需求改在 1920 處理。</div></div>
-<div class="heading">天氣</div>
-<div class="morecard"><b>🌤️ 墾丁天氣查詢</b><div class="subtitle">拍攝前建議確認降雨、風速與日落時間。</div><button class="primary" onclick="openWeather()">開啟天氣查詢</button></div>
+<div class="card"><textarea id="memo" placeholder="攝影師交代事項、臨時要帶的東西、想補拍的畫面…"></textarea><div class="sub">輸入後自動保存在目前手機。</div></div>
 </section>
 
+<div class="build">UPDATED 08/24 · SIMPLE V8</div>
 </div>
 
 <nav class="tabs">
- <button class="active" data-target="home"><span>🏠</span>首頁</button>
- <button data-target="plan"><span>🗓️</span>行程</button>
- <button data-target="map"><span>🗺️</span>地圖</button>
- <button data-target="check"><span>☑️</span>清單</button>
- <button data-target="more"><span>☰</span>更多</button>
+<button class="active" data-target="home"><span>🏠</span>首頁</button>
+<button data-target="plan"><span>🗓️</span>行程</button>
+<button data-target="links"><span>🔗</span>連結</button>
+<button data-target="reminders"><span>🔔</span>提醒</button>
 </nav>
 
-<div class="drawer" id="drawer">
- <div class="shade" onclick="closeDrawer()"></div>
- <div class="sheet">
-  <h3>墾丁拍攝行程</h3>
-  <button class="menuitem" onclick="switchTab('home');closeDrawer()">🏠 首頁</button>
-  <button class="menuitem" onclick="switchTab('plan');closeDrawer()">🗓️ 拍攝行程</button>
-  <button class="menuitem" onclick="switchTab('map');closeDrawer()">🗺️ 地點導航</button>
-  <button class="menuitem" onclick="switchTab('check');closeDrawer()">☑️ 攜帶清單</button>
-  <button class="menuitem" onclick="openDialog('tips');closeDrawer()">📷 拍攝提醒</button>
-  <button class="menuitem" onclick="openMemo();closeDrawer()">📝 臨時備忘</button>
- </div>
-</div>
-
-
-<dialog id="reminders"><div class="modal">
-<div class="modalhead"><h3>🔔 提醒事項</h3><button class="close" onclick="reminders.close()">✕</button></div>
-
-<div class="reminder-title">住宿／房間安排</div>
-<div class="reminder-row"><div class="r-ico">📷</div><div><b>拍攝房</b><small>1930／3F 1910（扶手較寬）</small></div></div>
-<div class="reminder-row"><div class="r-ico">👰</div><div><b>宇＆淇</b><small>1920（置物）＋1930（住）1樓</small></div></div>
-<div class="reminder-row"><div class="r-ico">👨‍👩‍👧</div><div><b>小宇家人</b><small>1990（爸）／2000（妹）</small></div></div>
-<div class="reminder-row"><div class="r-ico">👨‍👩‍👧‍👦</div><div><b>淇淇家人</b><small>1940／2010</small></div></div>
-<div class="reminder-row"><div class="r-ico">🛏️</div><div><b>其他房間</b><small>V哥 1960｜彥文 1980｜阿伯 1900｜造型師 1950｜1970 空房</small></div></div>
-
-<div class="reminder-title">退房／器材／換裝</div>
-<div class="reminder-row"><div class="r-ico">⏰</div><div><b>11:00 前退房</b><small>務必在 11:00 前完成退房。</small></div></div>
-<div class="reminder-row"><div class="r-ico">🎒</div><div><b>器材可先放 1920</b><small>如退房後仍有拍攝需求，器材可先集中放置於 1920。</small></div></div>
-<div class="reminder-row"><div class="r-ico">👗</div><div><b>11:00 後換裝</b><small>11:00 後若有換裝需求，統一在 1920 處理。</small></div></div>
-
-<div class="reminder-title">日日旅海／入園須知</div>
-<div class="reminder-row"><div class="r-ico">🌿</div><div><b>對外開放時間</b><small>咖啡廳及戶外草皮區：11:00～16:30。其餘時間非住客請勿逗留旅店區域，以免打擾住客。</small></div></div>
-<div class="reminder-row"><div class="r-ico">☕</div><div><b>Ocean Day Cafe</b><small>每週六、日、一｜11:00～18:00｜最後點餐 17:30。</small></div></div><div class="reminder-row"><div class="r-ico">🌐</div><div><b>日日旅海官方網站</b><small><a href="https://www.oceandayhotel.com" target="_blank" rel="noopener" style="color:#79d5ff">點擊開啟官方網站</a></small></div></div>
-</div></dialog>
-
-<dialog id="tips"><div class="modal"><div class="modalhead"><h3>📷 拍攝提醒</h3><button class="close" onclick="tips.close()">✕</button></div>
-<div class="tip"><b>前一天</b><p>確認白紗、黑紗、輕寫真服裝與配件；手機、行動電源與相機電池充飽。</p></div>
-<div class="tip"><b>海邊拍攝</b><p>拖鞋、毛巾、防曬、防蚊、飲水都準備好，海風較強可攜帶髮夾與固定用品。</p></div>
-<div class="tip"><b>換裝</b><p>建議穿前開式上衣前往化妝，避免換衣時影響妝髮。</p></div>
-<div class="tip"><b>黑紗</b><p>18:00 後光線變化快，預留換裝、補妝與移動緩衝。</p></div>
-</div></dialog>
-
 <script>
-const MAP_STARBUCKS="https://www.google.com/maps/search/?api=1&query=Starbucks%20%E6%81%86%E6%98%A5";
-const MAP_EAST="https://www.google.com/maps/search/?api=1&query=%E6%81%86%E6%98%A5%E5%8F%A4%E5%9F%8E%E6%9D%B1%E9%96%80%20%E5%B1%8F%E6%9D%B1%E7%B8%A3%E6%81%86%E6%98%A5%E9%8E%AE%E6%9D%B1%E9%96%80%E8%B7%AF";
-const OCEAN_WEBSITE="https://www.oceandayhotel.com";
-const MAP_LUNCH="https://www.google.com/maps/search/?api=1&query=%E8%BD%9F%E7%A8%BB%E6%A9%9F%20Hometown%20%E6%81%86%E6%98%A5";
-const MAP_STAY="https://www.google.com/maps/search/?api=1&query=%E6%97%A5%E6%97%A5%E6%97%85%E6%B5%B7%20%E5%B1%8F%E6%9D%B1%E7%B8%A3%E6%BB%BF%E5%B7%9E%E9%84%89%E8%88%88%E6%B5%B7%E8%B7%AF33%E8%99%9F";
 const schedule={
  day1:[
-  ["08:00","恆春星巴克｜化妝＋早餐","抵達恆春，完成妝髮並吃早餐",MAP_STARBUCKS],
-  ["10:00","恆春東門拍攝｜第一套","第一套造型拍攝",MAP_EAST],
-  ["12:00–13:30","轟稻機｜午餐＋補妝","用餐約 1.5 小時，包含補妝",MAP_LUNCH],
-  ["約 14:00","日日旅海｜補拍畫面","抵達民宿後先補拍一些畫面",MAP_STAY],
-  ["15:00–16:00","1930｜換白紗＋化妝","換白紗與妝髮調整，約 1 小時"],
-  ["16:00–17:30","1930｜拍新娘","室內新娘白紗拍攝"],
-  ["17:30–18:30","草皮＋海邊黃昏","戶外黃昏自然光拍攝"],
-  ["18:30–19:30","晚餐｜PIZZA","拍攝中場休息與用餐"],
-  ["20:00–21:00","換黑紗","黑紗換裝與妝髮調整"],
-  ["21:00–22:00","戶外＋室內微光拍攝","黑紗夜間／微光氛圍"],
-  ["22:30","休息","第一天拍攝結束"]
+ ["08:00","恆春星巴克｜化妝＋早餐","抵達恆春，完成妝髮並吃早餐"],
+ ["10:00","恆春東門拍攝｜第一套","第一套造型拍攝"],
+ ["12:00–13:30","轟稻機｜午餐＋補妝","用餐約 1.5 小時，包含補妝"],
+ ["約 14:00","日日旅海｜補拍畫面","抵達民宿後先補拍一些畫面"],
+ ["15:00–16:00","1930｜換白紗＋化妝","換白紗與妝髮調整，約 1 小時"],
+ ["16:00–17:30","1930｜拍新娘","室內新娘白紗拍攝"],
+ ["17:30–18:30","草皮＋海邊黃昏","戶外黃昏自然光拍攝"],
+ ["18:30–19:30","晚餐｜PIZZA","拍攝中場休息與用餐"],
+ ["20:00–21:00","換黑紗","黑紗換裝與妝髮調整"],
+ ["21:00–22:00","戶外＋室內微光拍攝","黑紗夜間／微光氛圍"],
+ ["22:30","休息","第一天拍攝結束"]
  ],
  day2:[
-  ["04:00","化妝｜白紗","日出拍攝前妝髮準備"],
-  ["06:00–07:00","海邊拍日出","白紗日出拍攝"],
-  ["07:00–08:30","休息＋換時裝","休息後換時裝；08:00～08:30 完成準備"],
-  ["09:00","吃早餐","早餐與短暫休息"],
-  ["10:00","草皮｜小清新野餐風","時裝／野餐風拍攝"],
-  ["11:00 前","退房","如仍有拍攝需求，器材可先放 1920"],
-  ["11:00 後","換裝改至 1920","所有換裝需求皆在 1920 處理"]
- ]
-};
-let done=JSON.parse(localStorage.getItem("jw_kenting_v5_done")||"{}");
-
+ ["04:00","化妝｜白紗","日出拍攝前妝髮準備"],
+ ["06:00–07:00","海邊拍日出","白紗日出拍攝"],
+ ["07:00–08:30","休息＋換時裝","08:00～08:30 完成換裝準備"],
+ ["09:00","吃早餐","早餐與短暫休息"],
+ ["10:00","草皮｜小清新野餐風","時裝／野餐風拍攝"],
+ ["11:00 前","退房","器材可先放 1920"],
+ ["11:00 後","換裝改至 1920","所有換裝需求皆在 1920 處理"]
+ ]};
+let done=JSON.parse(localStorage.getItem("jw_kenting_v8_done")||"{}");
 function renderDay(id){
  const root=document.getElementById(id);root.innerHTML="";
  schedule[id].forEach((x,i)=>{
-  const key=id+"_"+i,row=document.createElement("div");row.className="item";row.id="event_"+key;
-  row.innerHTML=`<div class="time">${x[0]}</div><div class="event">${x[1]}<small>${x[2]}</small>${x[3]?`<a class="maplink" target="_blank" href="${x[3]}">📍 Google Maps</a>`:""}</div><button class="tick ${done[key]?"done":""}" onclick="toggleDone('${key}')">${done[key]?"✓":""}</button>`;
-  root.appendChild(row);
- });
- progress(id);
+  const key=id+"_"+i,r=document.createElement("div");r.className="item";
+  r.innerHTML=`<div class="time">${x[0]}</div><div class="event">${x[1]}<small>${x[2]}</small></div><button class="tick ${done[key]?"done":""}" onclick="toggleDone('${key}')">${done[key]?"✓":""}</button>`;
+  root.appendChild(r);
+ }); progress(id);
 }
-function toggleDone(key){done[key]=!done[key];localStorage.setItem("jw_kenting_v5_done",JSON.stringify(done));renderDay("day1");renderDay("day2")}
-function progress(id){const total=schedule[id].length;let n=0;for(let i=0;i<total;i++)if(done[id+"_"+i])n++;const idx=id==="day1"?"1":"2",pct=Math.round(n/total*100);document.getElementById("d"+idx+"text").textContent=`${n} / ${total} 完成`;document.getElementById("d"+idx+"pct").textContent=pct+"%";document.getElementById("d"+idx+"fill").style.width=pct+"%"}
-
-function switchTab(id){document.querySelectorAll(".section").forEach(s=>s.classList.toggle("active",s.id===id));document.querySelectorAll(".tabs button").forEach(b=>b.classList.toggle("active",b.dataset.target===id));window.scrollTo({top:0,behavior:"smooth"})}
+function toggleDone(k){done[k]=!done[k];localStorage.setItem("jw_kenting_v8_done",JSON.stringify(done));renderDay("day1");renderDay("day2")}
+function progress(id){const t=schedule[id].length;let n=0;for(let i=0;i<t;i++)if(done[id+"_"+i])n++;const j=id==="day1"?"1":"2",p=Math.round(n/t*100);document.getElementById("d"+j+"text").textContent=`${n} / ${t} 完成`;document.getElementById("d"+j+"pct").textContent=p+"%";document.getElementById("d"+j+"fill").style.width=p+"%"}
+function switchTab(id){document.querySelectorAll(".section").forEach(s=>s.classList.toggle("active",s.id===id));document.querySelectorAll(".tabs button").forEach(b=>b.classList.toggle("active",b.dataset.target===id));scrollTo({top:0,behavior:"smooth"})}
 document.querySelectorAll(".tabs button").forEach(b=>b.onclick=()=>switchTab(b.dataset.target));
-
-function gotoEvent(day,index){switchTab("plan");setTimeout(()=>{const d=document.getElementById(day+"box");d.open=true;const el=document.getElementById("event_"+day+"_"+index);el.scrollIntoView({behavior:"smooth",block:"center"});el.classList.add("flash");setTimeout(()=>el.classList.remove("flash"),1300)},250)}
-function highlightDay(id){setTimeout(()=>{const d=document.getElementById(id);d.open=true;d.scrollIntoView({behavior:"smooth",block:"start"});d.classList.add("flash");setTimeout(()=>d.classList.remove("flash"),1300)},250)}
-
-document.getElementById("menuBtn").onclick=()=>drawer.classList.add("show");
-function closeDrawer(){drawer.classList.remove("show")}
-function openDialog(id){document.getElementById(id).showModal()}
-function openMemo(){switchTab("more");setTimeout(()=>document.getElementById("memo").focus(),250)}
-function openWeather(){window.open("https://www.google.com/search?q=%E5%A2%BE%E4%B8%81+%E5%A4%A9%E6%B0%A3","_blank")}
-document.getElementById("weatherBtn").onclick=openWeather;
-document.getElementById("notifyBtn").onclick=()=>openDialog("reminders");
 
 const items=["白紗、黑紗、輕寫真服裝","婚鞋＋拖鞋／便鞋","隱形內衣／胸貼／無痕內著","男生西裝／襯衫／皮鞋／皮帶／襪子","耳環、項鍊、頭飾、戒指、捧花","補妝品、吸油面紙、唇彩","防曬、防蚊、飲用水、毛巾","髮夾、橡皮筋、安全別針、雙面膠","手機、行動電源、充電線","相機、電池、記憶卡、充電器","透明雨傘／輕便雨具"];
 const checklist=document.getElementById("checklist");
-items.forEach((x,i)=>{const row=document.createElement("div");row.className="checkrow";const k="jw_kenting_v5_check_"+i;row.innerHTML=`<input id="c${i}" type="checkbox" ${localStorage.getItem(k)==="1"?"checked":""}><label for="c${i}">${x}</label>`;row.querySelector("input").onchange=e=>localStorage.setItem(k,e.target.checked?"1":"0");checklist.appendChild(row)});
-function resetChecklist(){if(confirm("確定要清除所有勾選嗎？")){items.forEach((_,i)=>localStorage.removeItem("jw_kenting_v5_check_"+i));document.querySelectorAll("#checklist input").forEach(x=>x.checked=false)}}
-
-const memo=document.getElementById("memo");memo.value=localStorage.getItem("jw_kenting_v5_memo")||"";memo.oninput=()=>localStorage.setItem("jw_kenting_v5_memo",memo.value);
-
+items.forEach((x,i)=>{const k="jw_kenting_v8_check_"+i,r=document.createElement("div");r.className="checkrow";r.innerHTML=`<input id="c${i}" type="checkbox" ${localStorage.getItem(k)==="1"?"checked":""}><label for="c${i}">${x}</label>`;r.querySelector("input").onchange=e=>localStorage.setItem(k,e.target.checked?"1":"0");checklist.appendChild(r)});
+function resetChecklist(){if(confirm("確定清除全部勾選？")){items.forEach((_,i)=>localStorage.removeItem("jw_kenting_v8_check_"+i));document.querySelectorAll("#checklist input").forEach(x=>x.checked=false)}}
+const memo=document.getElementById("memo");memo.value=localStorage.getItem("jw_kenting_v8_memo")||"";memo.oninput=()=>localStorage.setItem("jw_kenting_v8_memo",memo.value);
 renderDay("day1");renderDay("day2");
-</script>
 
-<script>
-window.addEventListener("load", async () => {
-  try {
-    if ("serviceWorker" in navigator) {
-      const regs = await navigator.serviceWorker.getRegistrations();
-      for (const reg of regs) await reg.unregister();
-    }
-    if ("caches" in window) {
-      const keys = await caches.keys();
-      for (const key of keys) await caches.delete(key);
-    }
-  } catch(e) {}
-});
+window.addEventListener("load",async()=>{try{if("serviceWorker"in navigator){const regs=await navigator.serviceWorker.getRegistrations();for(const r of regs)await r.unregister()}if("caches"in window){for(const k of await caches.keys())await caches.delete(k)}}catch(e){}});
 </script>
-</body>
-</html>
+</body></html>
