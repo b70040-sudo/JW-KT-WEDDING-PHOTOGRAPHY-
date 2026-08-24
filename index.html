@@ -101,7 +101,7 @@ dialog::backdrop{background:#000b;backdrop-filter:blur(3px)}.modal{padding:18px}
     <button class="iconbtn notify-btn" id="notifyBtn" aria-label="提醒事項">🔔<span class="notify-dot"></span></button><button class="weather" id="weatherBtn"><span>🌤️</span><div><b>天氣</b><small>點擊查看</small></div></button>
   </div>
   <h1 class="title">墾丁拍攝行程 📷</h1>
-  <div class="subtitle">10/17～10/18｜婚紗・海景・民宿・輕寫真</div><div style="margin-top:7px;color:#62e3ad;font-size:11px;font-weight:900">UPDATED 08/24 · REMINDER V5</div>
+  <div class="subtitle">10/17～10/18｜婚紗・海景・民宿・輕寫真</div><div style="margin-top:7px;color:#62e3ad;font-size:11px;font-weight:900">UPDATED 08/24 · LINKS V6</div>
 </header>
 
 <div class="hero">
@@ -147,7 +147,8 @@ dialog::backdrop{background:#000b;backdrop-filter:blur(3px)}.modal{padding:18px}
 <section id="map" class="section">
 <header class="header"><div class="brand">LOCATION</div><h1 class="title">地點與導航</h1><div class="subtitle">常用地點直接開啟 Google Maps。</div></header>
 <div class="mapcard"><b>🍽️ 轟稻機 Hometown</b><div class="subtitle">10/17 13:00 午餐</div><div class="map-preview">恆春午餐<br>↓<br>下一站：日日旅海</div><a class="primary" href="#" onclick="window.open(MAP_LUNCH,'_blank');return false">📍 開啟 Google Maps</a></div>
-<div class="mapcard"><b>🏡 日日旅海</b><div class="subtitle">屏東縣滿州鄉興海路 33 號</div><div class="map-preview">約 14:00 民宿拍攝<br>15:00 入住・白紗室內＆海邊</div><a class="primary" href="#" onclick="window.open(MAP_STAY,'_blank');return false">📍 開啟 Google Maps</a></div>
+<div class="mapcard"><b>🏯 恆春古城東門</b><div class="subtitle">10/17 10:00 第一套拍攝</div><div class="map-preview">恆春古城東門<br>第一套造型拍攝</div><a class="primary" href="#" onclick="window.open(MAP_EAST,'_blank');return false">📍 Google Maps 導航</a></div>
+<div class="mapcard"><b>🏡 日日旅海</b><div class="subtitle">屏東縣滿州鄉興海路 33 號</div><div class="map-preview">約 14:00 民宿拍攝<br>15:00 入住・白紗室內＆海邊</div><a class="primary" href="#" onclick="window.open(MAP_STAY,'_blank');return false">📍 開啟 Google Maps</a><a class="primary secondary" href="https://www.oceandayhotel.com" target="_blank" rel="noopener">🌐 日日旅海官方網站</a></div>
 </section>
 
 <section id="check" class="section">
@@ -219,7 +220,7 @@ dialog::backdrop{background:#000b;backdrop-filter:blur(3px)}.modal{padding:18px}
 
 <div class="reminder-title">日日旅海／入園須知</div>
 <div class="reminder-row"><div class="r-ico">🌿</div><div><b>對外開放時間</b><small>咖啡廳及戶外草皮區：11:00～16:30。其餘時間非住客請勿逗留旅店區域，以免打擾住客。</small></div></div>
-<div class="reminder-row"><div class="r-ico">☕</div><div><b>Ocean Day Cafe</b><small>每週六、日、一｜11:00～18:00｜最後點餐 17:30。</small></div></div>
+<div class="reminder-row"><div class="r-ico">☕</div><div><b>Ocean Day Cafe</b><small>每週六、日、一｜11:00～18:00｜最後點餐 17:30。</small></div></div><div class="reminder-row"><div class="r-ico">🌐</div><div><b>日日旅海官方網站</b><small><a href="https://www.oceandayhotel.com" target="_blank" rel="noopener" style="color:#79d5ff">點擊開啟官方網站</a></small></div></div>
 </div></dialog>
 
 <dialog id="tips"><div class="modal"><div class="modalhead"><h3>📷 拍攝提醒</h3><button class="close" onclick="tips.close()">✕</button></div>
@@ -231,7 +232,8 @@ dialog::backdrop{background:#000b;backdrop-filter:blur(3px)}.modal{padding:18px}
 
 <script>
 const MAP_STARBUCKS="https://www.google.com/maps/search/?api=1&query=Starbucks%20%E6%81%86%E6%98%A5";
-const MAP_EAST="https://www.google.com/maps/search/?api=1&query=%E6%81%86%E6%98%A5%E6%9D%B1%E9%96%80";
+const MAP_EAST="https://www.google.com/maps/search/?api=1&query=%E6%81%86%E6%98%A5%E5%8F%A4%E5%9F%8E%E6%9D%B1%E9%96%80%20%E5%B1%8F%E6%9D%B1%E7%B8%A3%E6%81%86%E6%98%A5%E9%8E%AE%E6%9D%B1%E9%96%80%E8%B7%AF";
+const OCEAN_WEBSITE="https://www.oceandayhotel.com";
 const MAP_LUNCH="https://www.google.com/maps/search/?api=1&query=%E8%BD%9F%E7%A8%BB%E6%A9%9F%20Hometown%20%E6%81%86%E6%98%A5";
 const MAP_STAY="https://www.google.com/maps/search/?api=1&query=%E6%97%A5%E6%97%A5%E6%97%85%E6%B5%B7%20%E5%B1%8F%E6%9D%B1%E7%B8%A3%E6%BB%BF%E5%B7%9E%E9%84%89%E8%88%88%E6%B5%B7%E8%B7%AF33%E8%99%9F";
 const schedule={
