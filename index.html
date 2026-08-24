@@ -115,20 +115,21 @@ dialog::backdrop{background:#000b;backdrop-filter:blur(3px)}.modal{padding:18px}
 </div>
 
 <div class="quick-cards">
-  <button class="info-card" onclick="switchTab('plan');highlightDay('day1box')"><small>Day 1 開始</small><b>07:00 化妝</b><span>09:00 出發前往墾丁</span></button>
-  <button class="info-card" onclick="switchTab('plan');highlightDay('day2box')"><small>Day 2 開始</small><b>06:00 化妝</b><span>07:00 拍攝輕寫真</span></button>
+  <button class="info-card" onclick="switchTab('plan');highlightDay('day1box')"><small>Day 1 開始</small><b>08:00 星巴克化妝</b><span>10:00 恆春東門第一套</span></button>
+  <button class="info-card" onclick="switchTab('plan');highlightDay('day2box')"><small>Day 2 開始</small><b>04:00 化妝</b><span>06:00 海邊拍日出</span></button>
 </div>
 
 <div class="heading">10/17 快速路線</div>
 <div class="routebox">
-  <button class="route" onclick="gotoEvent('day1',0)">💄 化妝</button><span class="arr">→</span>
-  <button class="route" onclick="gotoEvent('day1',1)">🚗 出發</button><span class="arr">→</span>
+  <button class="route" onclick="window.open(MAP_STARBUCKS,'_blank')">☕ 星巴克</button><span class="arr">→</span>
+  <button class="route" onclick="window.open(MAP_EAST,'_blank')">🏯 東門</button><span class="arr">→</span>
   <button class="route" onclick="window.open(MAP_LUNCH,'_blank')">🍽️ 午餐</button><span class="arr">→</span>
   <button class="route" onclick="window.open(MAP_STAY,'_blank')">🏡 民宿</button><span class="arr">→</span>
-  <button class="route" onclick="gotoEvent('day1',4)">👗 白紗</button><span class="arr">→</span>
-  <button class="route" onclick="gotoEvent('day1',5)">🌙 黑紗</button>
+  <button class="route" onclick="gotoEvent('day1',5)">👰 白紗</button><span class="arr">→</span>
+  <button class="route" onclick="gotoEvent('day1',6)">🌅 黃昏</button><span class="arr">→</span>
+  <button class="route" onclick="gotoEvent('day1',8)">🖤 黑紗</button>
 </div>
-<div class="reminder" onclick="openDialog('tips')"><div class="ico">📌</div><div><b>拍攝提醒</b><small>白紗海邊與 18:00 後黑紗拍攝，點擊查看完整提醒。</small></div><div>›</div></div>
+<div class="reminder" onclick="openDialog('tips')"><div class="ico">📌</div><div><b>拍攝提醒</b><small>11:00 前退房；器材可先放 1920，11:00 後換裝皆在 1920 處理。</small></div><div>›</div></div>
 </section>
 
 <section id="plan" class="section">
@@ -159,6 +160,14 @@ dialog::backdrop{background:#000b;backdrop-filter:blur(3px)}.modal{padding:18px}
 </div>
 <div class="heading">臨時備忘</div>
 <div class="morecard"><textarea id="memo" placeholder="攝影師交代事項、要補拍的畫面、臨時要帶的東西…"></textarea><div class="subtitle">輸入後自動保存。</div></div>
+<div class="heading">房間安排</div><div class="morecard">
+<b>🏠 墾丁房間安排</b><div class="subtitle" style="margin-top:10px;line-height:1.9">
+📷 拍攝房：1930／3F 1910（扶手較寬）<br>
+👥 宇＆淇：1920（置物）＋1930（住）1樓<br>
+👤 V哥：1960<br>👤 彥文：1980<br>👤 阿伯：1900<br>💄 造型師：1950
+</div></div>
+<div class="heading">退房與換裝提醒</div><div class="morecard">
+<b>⏰ 11:00 前退房</b><div class="subtitle" style="margin-top:8px;line-height:1.8">如有拍攝需求，器材可先放 1920。<br>11:00 後所有換裝需求改在 1920 處理。</div></div>
 <div class="heading">天氣</div>
 <div class="morecard"><b>🌤️ 墾丁天氣查詢</b><div class="subtitle">拍攝前建議確認降雨、風速與日落時間。</div><button class="primary" onclick="openWeather()">開啟天氣查詢</button></div>
 </section>
@@ -194,24 +203,35 @@ dialog::backdrop{background:#000b;backdrop-filter:blur(3px)}.modal{padding:18px}
 </div></dialog>
 
 <script>
+const MAP_STARBUCKS="https://www.google.com/maps/search/?api=1&query=Starbucks%20%E6%81%86%E6%98%A5";
+const MAP_EAST="https://www.google.com/maps/search/?api=1&query=%E6%81%86%E6%98%A5%E6%9D%B1%E9%96%80";
 const MAP_LUNCH="https://www.google.com/maps/search/?api=1&query=%E8%BD%9F%E7%A8%BB%E6%A9%9F%20Hometown%20%E6%81%86%E6%98%A5";
 const MAP_STAY="https://www.google.com/maps/search/?api=1&query=%E6%97%A5%E6%97%A5%E6%97%85%E6%B5%B7%20%E5%B1%8F%E6%9D%B1%E7%B8%A3%E6%BB%BF%E5%B7%9E%E9%84%89%E8%88%88%E6%B5%B7%E8%B7%AF33%E8%99%9F";
 const schedule={
  day1:[
-  ["07:00","化妝","妝髮與造型準備"],
-  ["09:00","出發前往墾丁","確認婚紗、配件與拍攝用品後出發"],
-  ["13:00","轟稻機 Hometown 午餐","午餐與休息",MAP_LUNCH],
-  ["約 14:00","日日旅海民宿拍攝","屏東縣滿州鄉興海路 33 號",MAP_STAY],
-  ["15:00","入住・換白紗拍攝","室內 ＆ 海邊"],
-  ["18:00 後","拍攝黑紗","傍晚／夜間拍攝"]
+  ["08:00","恆春星巴克｜化妝＋早餐","抵達恆春，完成妝髮並吃早餐",MAP_STARBUCKS],
+  ["10:00","恆春東門拍攝｜第一套","第一套造型拍攝",MAP_EAST],
+  ["12:00–13:30","轟稻機｜午餐＋補妝","用餐約 1.5 小時，包含補妝",MAP_LUNCH],
+  ["約 14:00","日日旅海｜補拍畫面","抵達民宿後先補拍一些畫面",MAP_STAY],
+  ["15:00–16:00","1930｜換白紗＋化妝","換白紗與妝髮調整，約 1 小時"],
+  ["16:00–17:30","1930｜拍新娘","室內新娘白紗拍攝"],
+  ["17:30–18:30","草皮＋海邊黃昏","戶外黃昏自然光拍攝"],
+  ["18:30–19:30","晚餐｜PIZZA","拍攝中場休息與用餐"],
+  ["20:00–21:00","換黑紗","黑紗換裝與妝髮調整"],
+  ["21:00–22:00","戶外＋室內微光拍攝","黑紗夜間／微光氛圍"],
+  ["22:30","休息","第一天拍攝結束"]
  ],
  day2:[
-  ["06:00","化妝","第二天妝髮準備"],
-  ["07:00","拍攝輕寫真","清晨自然光"],
-  ["08:00–09:00","各自用餐","自由早餐時間"]
+  ["04:00","化妝｜白紗","日出拍攝前妝髮準備"],
+  ["06:00–07:00","海邊拍日出","白紗日出拍攝"],
+  ["07:00–08:30","休息＋換時裝","休息後換時裝；08:00～08:30 完成準備"],
+  ["09:00","吃早餐","早餐與短暫休息"],
+  ["10:00","草皮｜小清新野餐風","時裝／野餐風拍攝"],
+  ["11:00 前","退房","如仍有拍攝需求，器材可先放 1920"],
+  ["11:00 後","換裝改至 1920","所有換裝需求皆在 1920 處理"]
  ]
 };
-let done=JSON.parse(localStorage.getItem("jw_kenting_func_done")||"{}");
+let done=JSON.parse(localStorage.getItem("jw_kenting_v3_done")||"{}");
 
 function renderDay(id){
  const root=document.getElementById(id);root.innerHTML="";
@@ -222,7 +242,7 @@ function renderDay(id){
  });
  progress(id);
 }
-function toggleDone(key){done[key]=!done[key];localStorage.setItem("jw_kenting_func_done",JSON.stringify(done));renderDay("day1");renderDay("day2")}
+function toggleDone(key){done[key]=!done[key];localStorage.setItem("jw_kenting_v3_done",JSON.stringify(done));renderDay("day1");renderDay("day2")}
 function progress(id){const total=schedule[id].length;let n=0;for(let i=0;i<total;i++)if(done[id+"_"+i])n++;const idx=id==="day1"?"1":"2",pct=Math.round(n/total*100);document.getElementById("d"+idx+"text").textContent=`${n} / ${total} 完成`;document.getElementById("d"+idx+"pct").textContent=pct+"%";document.getElementById("d"+idx+"fill").style.width=pct+"%"}
 
 function switchTab(id){document.querySelectorAll(".section").forEach(s=>s.classList.toggle("active",s.id===id));document.querySelectorAll(".tabs button").forEach(b=>b.classList.toggle("active",b.dataset.target===id));window.scrollTo({top:0,behavior:"smooth"})}
@@ -240,10 +260,10 @@ document.getElementById("weatherBtn").onclick=openWeather;
 
 const items=["白紗、黑紗、輕寫真服裝","婚鞋＋拖鞋／便鞋","隱形內衣／胸貼／無痕內著","男生西裝／襯衫／皮鞋／皮帶／襪子","耳環、項鍊、頭飾、戒指、捧花","補妝品、吸油面紙、唇彩","防曬、防蚊、飲用水、毛巾","髮夾、橡皮筋、安全別針、雙面膠","手機、行動電源、充電線","相機、電池、記憶卡、充電器","透明雨傘／輕便雨具"];
 const checklist=document.getElementById("checklist");
-items.forEach((x,i)=>{const row=document.createElement("div");row.className="checkrow";const k="jw_kenting_func_check_"+i;row.innerHTML=`<input id="c${i}" type="checkbox" ${localStorage.getItem(k)==="1"?"checked":""}><label for="c${i}">${x}</label>`;row.querySelector("input").onchange=e=>localStorage.setItem(k,e.target.checked?"1":"0");checklist.appendChild(row)});
-function resetChecklist(){if(confirm("確定要清除所有勾選嗎？")){items.forEach((_,i)=>localStorage.removeItem("jw_kenting_func_check_"+i));document.querySelectorAll("#checklist input").forEach(x=>x.checked=false)}}
+items.forEach((x,i)=>{const row=document.createElement("div");row.className="checkrow";const k="jw_kenting_v3_check_"+i;row.innerHTML=`<input id="c${i}" type="checkbox" ${localStorage.getItem(k)==="1"?"checked":""}><label for="c${i}">${x}</label>`;row.querySelector("input").onchange=e=>localStorage.setItem(k,e.target.checked?"1":"0");checklist.appendChild(row)});
+function resetChecklist(){if(confirm("確定要清除所有勾選嗎？")){items.forEach((_,i)=>localStorage.removeItem("jw_kenting_v3_check_"+i));document.querySelectorAll("#checklist input").forEach(x=>x.checked=false)}}
 
-const memo=document.getElementById("memo");memo.value=localStorage.getItem("jw_kenting_func_memo")||"";memo.oninput=()=>localStorage.setItem("jw_kenting_func_memo",memo.value);
+const memo=document.getElementById("memo");memo.value=localStorage.getItem("jw_kenting_v3_memo")||"";memo.oninput=()=>localStorage.setItem("jw_kenting_v3_memo",memo.value);
 
 renderDay("day1");renderDay("day2");
 </script>
