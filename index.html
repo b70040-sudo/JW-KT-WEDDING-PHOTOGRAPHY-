@@ -40,16 +40,32 @@ button,a{font:inherit;-webkit-tap-highlight-color:transparent}
 textarea{width:100%;min-height:130px;background:#071725;color:white;border:1px solid var(--line);border-radius:14px;padding:12px;font-size:15px;resize:vertical}
 .btn{display:block;width:100%;border:0;border-radius:14px;background:#dbf5ff;color:#07223a;font-weight:950;padding:12px;text-align:center;text-decoration:none;margin-top:10px}
 .btn.secondary{background:#183a58;color:white;border:1px solid #315b80}
-.tabs{position:fixed;left:50%;bottom:0;transform:translateX(-50%);width:min(640px,100%);display:grid;grid-template-columns:repeat(4,1fr);background:#07101df3;backdrop-filter:blur(18px);border-top:1px solid #223d59;padding:7px 5px calc(7px + env(safe-area-inset-bottom));z-index:20}.tabs button{border:0;background:none;color:#94a5b8;font-size:10px;font-weight:900;padding:7px 2px}.tabs button.active{color:var(--cyan)}.tabs span{display:block;font-size:22px;margin-bottom:2px}
+.tabs{position:fixed;left:50%;bottom:0;transform:translateX(-50%);width:min(640px,100%);display:grid;grid-template-columns:repeat(5,1fr);background:#07101df3;backdrop-filter:blur(18px);border-top:1px solid #223d59;padding:7px 5px calc(7px + env(safe-area-inset-bottom));z-index:20}.tabs button{border:0;background:none;color:#94a5b8;font-size:10px;font-weight:900;padding:7px 2px}.tabs button.active{color:var(--cyan)}.tabs span{display:block;font-size:22px;margin-bottom:2px}
 .build{text-align:center;color:#63798f;font-size:10px;padding:18px}
 @media(max-width:430px){.heroimg{height:215px}.quickgrid{grid-template-columns:1fr}.item{grid-template-columns:80px 1fr auto}.date{font-size:41px}}
+
+.bellbtn{
+  position:relative;width:42px;height:42px;border-radius:14px;border:1px solid var(--line);
+  background:#102942;color:white;font-size:20px;display:grid;place-items:center
+}
+.belldot{
+  position:absolute;right:5px;top:5px;width:9px;height:9px;border-radius:50%;
+  background:#fb7185;box-shadow:0 0 0 2px #07101d
+}
 </style>
 </head>
 <body>
 <div class="app"><div class="safe"></div>
 
 <section id="home" class="section active">
-<header class="header"><div class="brand">JW · KENTING SHOOTING</div><h1>墾丁拍攝行程 📷</h1><div class="sub">10/17～10/18｜婚紗・海景・民宿・輕寫真</div></header>
+<header class="header">
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:10px">
+        <div class="brand">JW · KENTING SHOOTING</div>
+        <button class="bellbtn" onclick="switchTab('reminders')" aria-label="提醒事項">🔔<span class="belldot"></span></button>
+      </div>
+      <h1>墾丁拍攝行程 📷</h1>
+      <div class="sub">10/17～10/18｜婚紗・海景・民宿・輕寫真</div>
+    </header>
 <div class="hero"><div class="heroimg"></div><div class="herobody"><div class="sub">拍攝日期</div><div class="date">10/17 <small>～ 10/18</small></div><div class="tags"><span class="tag">👰 白紗＋黑紗</span><span class="tag">🏡 日日旅海</span><span class="tag">🌊 海邊＋草皮</span></div></div></div>
 
 <div class="heading">快速入口</div>
@@ -57,7 +73,7 @@ textarea{width:100%;min-height:130px;background:#071725;color:white;border:1px s
   <button class="quick" onclick="switchTab('plan')"><div class="ico">🗓️</div><b>拍攝行程</b><small>10/17、10/18 全部時間與完成勾選</small></button>
   <button class="quick" onclick="switchTab('links')"><div class="ico">🔗</div><b>地點與連結</b><small>所有 Google Maps 與日日旅海官網集中在這裡</small></button>
   <button class="quick" onclick="switchTab('reminders')"><div class="ico">🔔</div><b>提醒中心</b><small>房間、退房、入園、器材與拍攝提醒統一收納</small></button>
-  <button class="quick" onclick="switchTab('reminders');setTimeout(()=>document.getElementById('memo').focus(),250)"><div class="ico">📝</div><b>臨時備忘</b><small>拍攝現場交代事項自動保存</small></button>
+  <button class="quick" onclick="switchTab('checklistPage')"><div class="ico">🧳</div><b>婚紗攜帶清單</b><small>獨立頁面，分類確認更多用品</small></button>
 </div>
 
 <div class="heading">10/17 快速路線</div>
@@ -114,21 +130,104 @@ textarea{width:100%;min-height:130px;background:#071725;color:white;border:1px s
 <div class="row"><div class="ico">🖤</div><div><b>黑紗微光</b><small>20:00～21:00 換黑紗，21:00～22:00 戶外＋室內微光拍攝。</small></div></div>
 </div>
 
-<div class="heading">婚紗攜帶清單</div>
-<div class="card" id="checklist"></div>
-<button class="btn secondary" onclick="resetChecklist()">清除全部勾選</button>
-
 <div class="heading">臨時備忘</div>
 <div class="card"><textarea id="memo" placeholder="攝影師交代事項、臨時要帶的東西、想補拍的畫面…"></textarea><div class="sub">輸入後自動保存在目前手機。</div></div>
 </section>
 
-<div class="build">UPDATED 08/24 · SIMPLE V8</div>
+
+<section id="checklistPage" class="section">
+<header class="header">
+  <div class="brand">CHECKLIST</div>
+  <h1>婚紗攜帶清單 🧳</h1>
+  <div class="sub">依類別逐項確認，勾選狀態會自動保存在目前手機。</div>
+</header>
+
+<div class="card">
+  <div class="remtitle">👰 新娘服裝／內著</div>
+  <div class="checkrow"><input id="ck0" type="checkbox"><label for="ck0">白紗</label></div>
+  <div class="checkrow"><input id="ck1" type="checkbox"><label for="ck1">黑紗</label></div>
+  <div class="checkrow"><input id="ck2" type="checkbox"><label for="ck2">輕寫真／時裝服裝</label></div>
+  <div class="checkrow"><input id="ck3" type="checkbox"><label for="ck3">隱形內衣／胸貼</label></div>
+  <div class="checkrow"><input id="ck4" type="checkbox"><label for="ck4">膚色無痕內褲</label></div>
+  <div class="checkrow"><input id="ck5" type="checkbox"><label for="ck5">安全褲／防走光用品</label></div>
+</div>
+
+<div class="card">
+  <div class="remtitle">🤵 新郎服裝</div>
+  <div class="checkrow"><input id="ck6" type="checkbox"><label for="ck6">西裝外套／西裝褲</label></div>
+  <div class="checkrow"><input id="ck7" type="checkbox"><label for="ck7">白襯衫／備用襯衫</label></div>
+  <div class="checkrow"><input id="ck8" type="checkbox"><label for="ck8">皮鞋／休閒鞋</label></div>
+  <div class="checkrow"><input id="ck9" type="checkbox"><label for="ck9">皮帶／領帶／領結</label></div>
+  <div class="checkrow"><input id="ck10" type="checkbox"><label for="ck10">深色／淺色襪子</label></div>
+</div>
+
+<div class="card">
+  <div class="remtitle">👠 鞋子／配件</div>
+  <div class="checkrow"><input id="ck11" type="checkbox"><label for="ck11">婚鞋</label></div>
+  <div class="checkrow"><input id="ck12" type="checkbox"><label for="ck12">拖鞋／好走便鞋</label></div>
+  <div class="checkrow"><input id="ck13" type="checkbox"><label for="ck13">耳環／項鍊／頭飾</label></div>
+  <div class="checkrow"><input id="ck14" type="checkbox"><label for="ck14">婚戒／戒盒</label></div>
+  <div class="checkrow"><input id="ck15" type="checkbox"><label for="ck15">捧花／拍攝小道具</label></div>
+</div>
+
+<div class="card">
+  <div class="remtitle">💄 妝髮／補妝</div>
+  <div class="checkrow"><input id="ck16" type="checkbox"><label for="ck16">粉餅／蜜粉／吸油面紙</label></div>
+  <div class="checkrow"><input id="ck17" type="checkbox"><label for="ck17">唇彩／口紅</label></div>
+  <div class="checkrow"><input id="ck18" type="checkbox"><label for="ck18">梳子／髮夾／黑色橡皮筋</label></div>
+  <div class="checkrow"><input id="ck19" type="checkbox"><label for="ck19">定型噴霧／髮妝用品</label></div>
+  <div class="checkrow"><input id="ck20" type="checkbox"><label for="ck20">卸妝／清潔用品</label></div>
+</div>
+
+<div class="card">
+  <div class="remtitle">📷 攝影器材</div>
+  <div class="checkrow"><input id="ck21" type="checkbox"><label for="ck21">相機機身／鏡頭</label></div>
+  <div class="checkrow"><input id="ck22" type="checkbox"><label for="ck22">備用電池</label></div>
+  <div class="checkrow"><input id="ck23" type="checkbox"><label for="ck23">記憶卡／備用記憶卡</label></div>
+  <div class="checkrow"><input id="ck24" type="checkbox"><label for="ck24">充電器／充電線</label></div>
+  <div class="checkrow"><input id="ck25" type="checkbox"><label for="ck25">腳架／穩定器（如需要）</label></div>
+  <div class="checkrow"><input id="ck26" type="checkbox"><label for="ck26">補光燈／小燈（夜間微光備用）</label></div>
+  <div class="checkrow"><input id="ck27" type="checkbox"><label for="ck27">鏡頭布／吹球／清潔用品</label></div>
+</div>
+
+<div class="card">
+  <div class="remtitle">📱 電子用品</div>
+  <div class="checkrow"><input id="ck28" type="checkbox"><label for="ck28">手機</label></div>
+  <div class="checkrow"><input id="ck29" type="checkbox"><label for="ck29">行動電源</label></div>
+  <div class="checkrow"><input id="ck30" type="checkbox"><label for="ck30">手機充電線</label></div>
+  <div class="checkrow"><input id="ck31" type="checkbox"><label for="ck31">多孔充電器／延長線</label></div>
+</div>
+
+<div class="card">
+  <div class="remtitle">🌊 戶外／海邊用品</div>
+  <div class="checkrow"><input id="ck32" type="checkbox"><label for="ck32">防曬乳</label></div>
+  <div class="checkrow"><input id="ck33" type="checkbox"><label for="ck33">防蚊液</label></div>
+  <div class="checkrow"><input id="ck34" type="checkbox"><label for="ck34">飲用水／吸管</label></div>
+  <div class="checkrow"><input id="ck35" type="checkbox"><label for="ck35">毛巾／浴巾</label></div>
+  <div class="checkrow"><input id="ck36" type="checkbox"><label for="ck36">濕紙巾／衛生紙</label></div>
+  <div class="checkrow"><input id="ck37" type="checkbox"><label for="ck37">透明傘／輕便雨具</label></div>
+  <div class="checkrow"><input id="ck38" type="checkbox"><label for="ck38">塑膠袋／防水袋（濕衣物、沙灘用品）</label></div>
+</div>
+
+<div class="card">
+  <div class="remtitle">🧰 緊急備用品</div>
+  <div class="checkrow"><input id="ck39" type="checkbox"><label for="ck39">安全別針</label></div>
+  <div class="checkrow"><input id="ck40" type="checkbox"><label for="ck40">服裝雙面膠</label></div>
+  <div class="checkrow"><input id="ck41" type="checkbox"><label for="ck41">OK 繃／簡易藥品</label></div>
+  <div class="checkrow"><input id="ck42" type="checkbox"><label for="ck42">簡單零食／能量補給</label></div>
+  <div class="checkrow"><input id="ck43" type="checkbox"><label for="ck43">現金／信用卡／證件</label></div>
+</div>
+
+<button class="btn secondary" onclick="resetFullChecklist()">清除全部勾選</button>
+</section>
+<div class="build">UPDATED 08/24 · V9 CHECKLIST</div>
 </div>
 
 <nav class="tabs">
 <button class="active" data-target="home"><span>🏠</span>首頁</button>
 <button data-target="plan"><span>🗓️</span>行程</button>
 <button data-target="links"><span>🔗</span>連結</button>
+<button data-target="checklistPage"><span>🧳</span>清單</button>
 <button data-target="reminders"><span>🔔</span>提醒</button>
 </nav>
 
@@ -156,7 +255,7 @@ const schedule={
  ["11:00 前","退房","器材可先放 1920"],
  ["11:00 後","換裝改至 1920","所有換裝需求皆在 1920 處理"]
  ]};
-let done=JSON.parse(localStorage.getItem("jw_kenting_v8_done")||"{}");
+let done=JSON.parse(localStorage.getItem("jw_kenting_v9_done")||"{}");
 function renderDay(id){
  const root=document.getElementById(id);root.innerHTML="";
  schedule[id].forEach((x,i)=>{
@@ -165,16 +264,26 @@ function renderDay(id){
   root.appendChild(r);
  }); progress(id);
 }
-function toggleDone(k){done[k]=!done[k];localStorage.setItem("jw_kenting_v8_done",JSON.stringify(done));renderDay("day1");renderDay("day2")}
+function toggleDone(k){done[k]=!done[k];localStorage.setItem("jw_kenting_v9_done",JSON.stringify(done));renderDay("day1");renderDay("day2")}
 function progress(id){const t=schedule[id].length;let n=0;for(let i=0;i<t;i++)if(done[id+"_"+i])n++;const j=id==="day1"?"1":"2",p=Math.round(n/t*100);document.getElementById("d"+j+"text").textContent=`${n} / ${t} 完成`;document.getElementById("d"+j+"pct").textContent=p+"%";document.getElementById("d"+j+"fill").style.width=p+"%"}
 function switchTab(id){document.querySelectorAll(".section").forEach(s=>s.classList.toggle("active",s.id===id));document.querySelectorAll(".tabs button").forEach(b=>b.classList.toggle("active",b.dataset.target===id));scrollTo({top:0,behavior:"smooth"})}
 document.querySelectorAll(".tabs button").forEach(b=>b.onclick=()=>switchTab(b.dataset.target));
 
-const items=["白紗、黑紗、輕寫真服裝","婚鞋＋拖鞋／便鞋","隱形內衣／胸貼／無痕內著","男生西裝／襯衫／皮鞋／皮帶／襪子","耳環、項鍊、頭飾、戒指、捧花","補妝品、吸油面紙、唇彩","防曬、防蚊、飲用水、毛巾","髮夾、橡皮筋、安全別針、雙面膠","手機、行動電源、充電線","相機、電池、記憶卡、充電器","透明雨傘／輕便雨具"];
-const checklist=document.getElementById("checklist");
-items.forEach((x,i)=>{const k="jw_kenting_v8_check_"+i,r=document.createElement("div");r.className="checkrow";r.innerHTML=`<input id="c${i}" type="checkbox" ${localStorage.getItem(k)==="1"?"checked":""}><label for="c${i}">${x}</label>`;r.querySelector("input").onchange=e=>localStorage.setItem(k,e.target.checked?"1":"0");checklist.appendChild(r)});
-function resetChecklist(){if(confirm("確定清除全部勾選？")){items.forEach((_,i)=>localStorage.removeItem("jw_kenting_v8_check_"+i));document.querySelectorAll("#checklist input").forEach(x=>x.checked=false)}}
-const memo=document.getElementById("memo");memo.value=localStorage.getItem("jw_kenting_v8_memo")||"";memo.oninput=()=>localStorage.setItem("jw_kenting_v8_memo",memo.value);
+
+document.querySelectorAll("#checklistPage input[type=checkbox]").forEach((cb,i)=>{
+  const key="jw_kenting_v9_fullcheck_"+i;
+  cb.checked=localStorage.getItem(key)==="1";
+  cb.addEventListener("change",()=>localStorage.setItem(key,cb.checked?"1":"0"));
+});
+function resetFullChecklist(){
+  if(confirm("確定清除婚紗攜帶清單全部勾選？")){
+    document.querySelectorAll("#checklistPage input[type=checkbox]").forEach((cb,i)=>{
+      cb.checked=false;
+      localStorage.removeItem("jw_kenting_v9_fullcheck_"+i);
+    });
+  }
+}
+const memo=document.getElementById("memo");memo.value=localStorage.getItem("jw_kenting_v9_memo")||"";memo.oninput=()=>localStorage.setItem("jw_kenting_v9_memo",memo.value);
 renderDay("day1");renderDay("day2");
 
 window.addEventListener("load",async()=>{try{if("serviceWorker"in navigator){const regs=await navigator.serviceWorker.getRegistrations();for(const r of regs)await r.unregister()}if("caches"in window){for(const k of await caches.keys())await caches.delete(k)}}catch(e){}});
