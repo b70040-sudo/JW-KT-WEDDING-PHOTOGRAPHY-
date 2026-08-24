@@ -95,7 +95,7 @@ dialog::backdrop{background:#000b;backdrop-filter:blur(3px)}.modal{padding:18px}
     <button class="weather" id="weatherBtn"><span>🌤️</span><div><b>天氣</b><small>點擊查看</small></div></button>
   </div>
   <h1 class="title">墾丁拍攝行程 📷</h1>
-  <div class="subtitle">10/17～10/18｜婚紗・海景・民宿・輕寫真</div>
+  <div class="subtitle">10/17～10/18｜婚紗・海景・民宿・輕寫真</div><div style="margin-top:7px;color:#62e3ad;font-size:11px;font-weight:900">UPDATED 08/24 · NEW SCHEDULE</div>
 </header>
 
 <div class="hero">
@@ -231,7 +231,7 @@ const schedule={
   ["11:00 後","換裝改至 1920","所有換裝需求皆在 1920 處理"]
  ]
 };
-let done=JSON.parse(localStorage.getItem("jw_kenting_v3_done")||"{}");
+let done=JSON.parse(localStorage.getItem("jw_kenting_v4_done")||"{}");
 
 function renderDay(id){
  const root=document.getElementById(id);root.innerHTML="";
@@ -242,7 +242,7 @@ function renderDay(id){
  });
  progress(id);
 }
-function toggleDone(key){done[key]=!done[key];localStorage.setItem("jw_kenting_v3_done",JSON.stringify(done));renderDay("day1");renderDay("day2")}
+function toggleDone(key){done[key]=!done[key];localStorage.setItem("jw_kenting_v4_done",JSON.stringify(done));renderDay("day1");renderDay("day2")}
 function progress(id){const total=schedule[id].length;let n=0;for(let i=0;i<total;i++)if(done[id+"_"+i])n++;const idx=id==="day1"?"1":"2",pct=Math.round(n/total*100);document.getElementById("d"+idx+"text").textContent=`${n} / ${total} 完成`;document.getElementById("d"+idx+"pct").textContent=pct+"%";document.getElementById("d"+idx+"fill").style.width=pct+"%"}
 
 function switchTab(id){document.querySelectorAll(".section").forEach(s=>s.classList.toggle("active",s.id===id));document.querySelectorAll(".tabs button").forEach(b=>b.classList.toggle("active",b.dataset.target===id));window.scrollTo({top:0,behavior:"smooth"})}
@@ -260,12 +260,27 @@ document.getElementById("weatherBtn").onclick=openWeather;
 
 const items=["白紗、黑紗、輕寫真服裝","婚鞋＋拖鞋／便鞋","隱形內衣／胸貼／無痕內著","男生西裝／襯衫／皮鞋／皮帶／襪子","耳環、項鍊、頭飾、戒指、捧花","補妝品、吸油面紙、唇彩","防曬、防蚊、飲用水、毛巾","髮夾、橡皮筋、安全別針、雙面膠","手機、行動電源、充電線","相機、電池、記憶卡、充電器","透明雨傘／輕便雨具"];
 const checklist=document.getElementById("checklist");
-items.forEach((x,i)=>{const row=document.createElement("div");row.className="checkrow";const k="jw_kenting_v3_check_"+i;row.innerHTML=`<input id="c${i}" type="checkbox" ${localStorage.getItem(k)==="1"?"checked":""}><label for="c${i}">${x}</label>`;row.querySelector("input").onchange=e=>localStorage.setItem(k,e.target.checked?"1":"0");checklist.appendChild(row)});
-function resetChecklist(){if(confirm("確定要清除所有勾選嗎？")){items.forEach((_,i)=>localStorage.removeItem("jw_kenting_v3_check_"+i));document.querySelectorAll("#checklist input").forEach(x=>x.checked=false)}}
+items.forEach((x,i)=>{const row=document.createElement("div");row.className="checkrow";const k="jw_kenting_v4_check_"+i;row.innerHTML=`<input id="c${i}" type="checkbox" ${localStorage.getItem(k)==="1"?"checked":""}><label for="c${i}">${x}</label>`;row.querySelector("input").onchange=e=>localStorage.setItem(k,e.target.checked?"1":"0");checklist.appendChild(row)});
+function resetChecklist(){if(confirm("確定要清除所有勾選嗎？")){items.forEach((_,i)=>localStorage.removeItem("jw_kenting_v4_check_"+i));document.querySelectorAll("#checklist input").forEach(x=>x.checked=false)}}
 
-const memo=document.getElementById("memo");memo.value=localStorage.getItem("jw_kenting_v3_memo")||"";memo.oninput=()=>localStorage.setItem("jw_kenting_v3_memo",memo.value);
+const memo=document.getElementById("memo");memo.value=localStorage.getItem("jw_kenting_v4_memo")||"";memo.oninput=()=>localStorage.setItem("jw_kenting_v4_memo",memo.value);
 
 renderDay("day1");renderDay("day2");
+</script>
+
+<script>
+window.addEventListener("load", async () => {
+  try {
+    if ("serviceWorker" in navigator) {
+      const regs = await navigator.serviceWorker.getRegistrations();
+      for (const reg of regs) await reg.unregister();
+    }
+    if ("caches" in window) {
+      const keys = await caches.keys();
+      for (const key of keys) await caches.delete(key);
+    }
+  } catch(e) {}
+});
 </script>
 </body>
 </html>

@@ -1,6 +1,43 @@
 {
-  "headers":[
-    {"source":"/index.html","headers":[{"key":"Cache-Control","value":"no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0"}]},
-    {"source":"/(.*)","headers":[{"key":"X-App-Build","value":"itinerary-v3-20260824"}]}
+  "headers": [
+    {
+      "source": "/",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0"
+        },
+        {
+          "key": "X-App-Build",
+          "value": "itinerary-v4-20260824"
+        }
+      ]
+    },
+    {
+      "source": "/index.html",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0"
+        },
+        {
+          "key": "X-App-Build",
+          "value": "itinerary-v4-20260824"
+        }
+      ]
+    },
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-cache"
+        },
+        {
+          "key": "X-App-Build",
+          "value": "itinerary-v4-20260824"
+        }
+      ]
+    }
   ]
 }
