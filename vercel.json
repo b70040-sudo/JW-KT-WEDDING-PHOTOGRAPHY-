@@ -9,7 +9,7 @@
         },
         {
           "key": "X-App-Build",
-          "value": "itinerary-v4-20260824"
+          "value": "reminder-v5-20260824"
         }
       ]
     },
@@ -19,10 +19,6 @@
         {
           "key": "Cache-Control",
           "value": "no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0"
-        },
-        {
-          "key": "X-App-Build",
-          "value": "itinerary-v4-20260824"
         }
       ]
     },
@@ -32,10 +28,6 @@
         {
           "key": "Cache-Control",
           "value": "no-cache"
-        },
-        {
-          "key": "X-App-Build",
-          "value": "itinerary-v4-20260824"
         }
       ]
     }

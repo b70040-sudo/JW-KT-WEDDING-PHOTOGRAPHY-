@@ -81,6 +81,12 @@ dialog::backdrop{background:#000b;backdrop-filter:blur(3px)}.modal{padding:18px}
 .flash{animation:flash 1.2s ease}
 @keyframes flash{0%,100%{box-shadow:none}40%{box-shadow:0 0 0 3px #55d4ff,0 0 30px #55d4ff88}}
 @media(max-width:430px){.hero-photo{height:280px}.hero-toolbar{grid-template-columns:repeat(2,1fr)}.quick-cards,.tools{grid-template-columns:1fr}.item{grid-template-columns:76px 1fr auto}.bigdate{font-size:43px}}
+
+.notify-btn{position:relative}
+.notify-dot{position:absolute;right:4px;top:4px;width:9px;height:9px;border-radius:50%;background:#fb7185;box-shadow:0 0 0 2px #07101d}
+.reminder-title{font-size:12px;color:var(--sky);font-weight:950;letter-spacing:.08em;margin:15px 0 8px}
+.reminder-row{display:flex;gap:10px;align-items:flex-start;background:#10263f;border:1px solid #244464;border-radius:14px;padding:11px 12px;margin-bottom:8px}
+.reminder-row .r-ico{font-size:20px}.reminder-row b{display:block;font-size:14px}.reminder-row small{display:block;color:var(--muted);font-size:12px;line-height:1.55;margin-top:3px}
 </style>
 </head>
 <body>
@@ -92,10 +98,10 @@ dialog::backdrop{background:#000b;backdrop-filter:blur(3px)}.modal{padding:18px}
   <div class="topline">
     <button class="iconbtn" id="menuBtn">☰</button>
     <div class="brand">JW · KENTING SHOOTING</div>
-    <button class="weather" id="weatherBtn"><span>🌤️</span><div><b>天氣</b><small>點擊查看</small></div></button>
+    <button class="iconbtn notify-btn" id="notifyBtn" aria-label="提醒事項">🔔<span class="notify-dot"></span></button><button class="weather" id="weatherBtn"><span>🌤️</span><div><b>天氣</b><small>點擊查看</small></div></button>
   </div>
   <h1 class="title">墾丁拍攝行程 📷</h1>
-  <div class="subtitle">10/17～10/18｜婚紗・海景・民宿・輕寫真</div><div style="margin-top:7px;color:#62e3ad;font-size:11px;font-weight:900">UPDATED 08/24 · NEW SCHEDULE</div>
+  <div class="subtitle">10/17～10/18｜婚紗・海景・民宿・輕寫真</div><div style="margin-top:7px;color:#62e3ad;font-size:11px;font-weight:900">UPDATED 08/24 · REMINDER V5</div>
 </header>
 
 <div class="hero">
@@ -129,7 +135,7 @@ dialog::backdrop{background:#000b;backdrop-filter:blur(3px)}.modal{padding:18px}
   <button class="route" onclick="gotoEvent('day1',6)">🌅 黃昏</button><span class="arr">→</span>
   <button class="route" onclick="gotoEvent('day1',8)">🖤 黑紗</button>
 </div>
-<div class="reminder" onclick="openDialog('tips')"><div class="ico">📌</div><div><b>拍攝提醒</b><small>11:00 前退房；器材可先放 1920，11:00 後換裝皆在 1920 處理。</small></div><div>›</div></div>
+<div class="reminder" onclick="openDialog('tips')"><div class="ico">📌</div><div><b>拍攝提醒</b><small>11:00 前退房；器材可先放 1920，11:00 後換裝皆在 1920 處理。</small></div><div>›</div></div><div class="reminder" onclick="openDialog('reminders')"><div class="ico">🔔</div><div><b>住宿／退房／入園提醒</b><small>房間安排、11:00 前退房、1920 換裝與日日旅海須知。</small></div><div>›</div></div>
 </section>
 
 <section id="plan" class="section">
@@ -195,6 +201,27 @@ dialog::backdrop{background:#000b;backdrop-filter:blur(3px)}.modal{padding:18px}
  </div>
 </div>
 
+
+<dialog id="reminders"><div class="modal">
+<div class="modalhead"><h3>🔔 提醒事項</h3><button class="close" onclick="reminders.close()">✕</button></div>
+
+<div class="reminder-title">住宿／房間安排</div>
+<div class="reminder-row"><div class="r-ico">📷</div><div><b>拍攝房</b><small>1930／3F 1910（扶手較寬）</small></div></div>
+<div class="reminder-row"><div class="r-ico">👰</div><div><b>宇＆淇</b><small>1920（置物）＋1930（住）1樓</small></div></div>
+<div class="reminder-row"><div class="r-ico">👨‍👩‍👧</div><div><b>小宇家人</b><small>1990（爸）／2000（妹）</small></div></div>
+<div class="reminder-row"><div class="r-ico">👨‍👩‍👧‍👦</div><div><b>淇淇家人</b><small>1940／2010</small></div></div>
+<div class="reminder-row"><div class="r-ico">🛏️</div><div><b>其他房間</b><small>V哥 1960｜彥文 1980｜阿伯 1900｜造型師 1950｜1970 空房</small></div></div>
+
+<div class="reminder-title">退房／器材／換裝</div>
+<div class="reminder-row"><div class="r-ico">⏰</div><div><b>11:00 前退房</b><small>務必在 11:00 前完成退房。</small></div></div>
+<div class="reminder-row"><div class="r-ico">🎒</div><div><b>器材可先放 1920</b><small>如退房後仍有拍攝需求，器材可先集中放置於 1920。</small></div></div>
+<div class="reminder-row"><div class="r-ico">👗</div><div><b>11:00 後換裝</b><small>11:00 後若有換裝需求，統一在 1920 處理。</small></div></div>
+
+<div class="reminder-title">日日旅海／入園須知</div>
+<div class="reminder-row"><div class="r-ico">🌿</div><div><b>對外開放時間</b><small>咖啡廳及戶外草皮區：11:00～16:30。其餘時間非住客請勿逗留旅店區域，以免打擾住客。</small></div></div>
+<div class="reminder-row"><div class="r-ico">☕</div><div><b>Ocean Day Cafe</b><small>每週六、日、一｜11:00～18:00｜最後點餐 17:30。</small></div></div>
+</div></dialog>
+
 <dialog id="tips"><div class="modal"><div class="modalhead"><h3>📷 拍攝提醒</h3><button class="close" onclick="tips.close()">✕</button></div>
 <div class="tip"><b>前一天</b><p>確認白紗、黑紗、輕寫真服裝與配件；手機、行動電源與相機電池充飽。</p></div>
 <div class="tip"><b>海邊拍攝</b><p>拖鞋、毛巾、防曬、防蚊、飲水都準備好，海風較強可攜帶髮夾與固定用品。</p></div>
@@ -231,7 +258,7 @@ const schedule={
   ["11:00 後","換裝改至 1920","所有換裝需求皆在 1920 處理"]
  ]
 };
-let done=JSON.parse(localStorage.getItem("jw_kenting_v4_done")||"{}");
+let done=JSON.parse(localStorage.getItem("jw_kenting_v5_done")||"{}");
 
 function renderDay(id){
  const root=document.getElementById(id);root.innerHTML="";
@@ -242,7 +269,7 @@ function renderDay(id){
  });
  progress(id);
 }
-function toggleDone(key){done[key]=!done[key];localStorage.setItem("jw_kenting_v4_done",JSON.stringify(done));renderDay("day1");renderDay("day2")}
+function toggleDone(key){done[key]=!done[key];localStorage.setItem("jw_kenting_v5_done",JSON.stringify(done));renderDay("day1");renderDay("day2")}
 function progress(id){const total=schedule[id].length;let n=0;for(let i=0;i<total;i++)if(done[id+"_"+i])n++;const idx=id==="day1"?"1":"2",pct=Math.round(n/total*100);document.getElementById("d"+idx+"text").textContent=`${n} / ${total} 完成`;document.getElementById("d"+idx+"pct").textContent=pct+"%";document.getElementById("d"+idx+"fill").style.width=pct+"%"}
 
 function switchTab(id){document.querySelectorAll(".section").forEach(s=>s.classList.toggle("active",s.id===id));document.querySelectorAll(".tabs button").forEach(b=>b.classList.toggle("active",b.dataset.target===id));window.scrollTo({top:0,behavior:"smooth"})}
@@ -257,13 +284,14 @@ function openDialog(id){document.getElementById(id).showModal()}
 function openMemo(){switchTab("more");setTimeout(()=>document.getElementById("memo").focus(),250)}
 function openWeather(){window.open("https://www.google.com/search?q=%E5%A2%BE%E4%B8%81+%E5%A4%A9%E6%B0%A3","_blank")}
 document.getElementById("weatherBtn").onclick=openWeather;
+document.getElementById("notifyBtn").onclick=()=>openDialog("reminders");
 
 const items=["白紗、黑紗、輕寫真服裝","婚鞋＋拖鞋／便鞋","隱形內衣／胸貼／無痕內著","男生西裝／襯衫／皮鞋／皮帶／襪子","耳環、項鍊、頭飾、戒指、捧花","補妝品、吸油面紙、唇彩","防曬、防蚊、飲用水、毛巾","髮夾、橡皮筋、安全別針、雙面膠","手機、行動電源、充電線","相機、電池、記憶卡、充電器","透明雨傘／輕便雨具"];
 const checklist=document.getElementById("checklist");
-items.forEach((x,i)=>{const row=document.createElement("div");row.className="checkrow";const k="jw_kenting_v4_check_"+i;row.innerHTML=`<input id="c${i}" type="checkbox" ${localStorage.getItem(k)==="1"?"checked":""}><label for="c${i}">${x}</label>`;row.querySelector("input").onchange=e=>localStorage.setItem(k,e.target.checked?"1":"0");checklist.appendChild(row)});
-function resetChecklist(){if(confirm("確定要清除所有勾選嗎？")){items.forEach((_,i)=>localStorage.removeItem("jw_kenting_v4_check_"+i));document.querySelectorAll("#checklist input").forEach(x=>x.checked=false)}}
+items.forEach((x,i)=>{const row=document.createElement("div");row.className="checkrow";const k="jw_kenting_v5_check_"+i;row.innerHTML=`<input id="c${i}" type="checkbox" ${localStorage.getItem(k)==="1"?"checked":""}><label for="c${i}">${x}</label>`;row.querySelector("input").onchange=e=>localStorage.setItem(k,e.target.checked?"1":"0");checklist.appendChild(row)});
+function resetChecklist(){if(confirm("確定要清除所有勾選嗎？")){items.forEach((_,i)=>localStorage.removeItem("jw_kenting_v5_check_"+i));document.querySelectorAll("#checklist input").forEach(x=>x.checked=false)}}
 
-const memo=document.getElementById("memo");memo.value=localStorage.getItem("jw_kenting_v4_memo")||"";memo.oninput=()=>localStorage.setItem("jw_kenting_v4_memo",memo.value);
+const memo=document.getElementById("memo");memo.value=localStorage.getItem("jw_kenting_v5_memo")||"";memo.oninput=()=>localStorage.setItem("jw_kenting_v5_memo",memo.value);
 
 renderDay("day1");renderDay("day2");
 </script>
